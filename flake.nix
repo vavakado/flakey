@@ -4,16 +4,11 @@
   inputs = { nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11"; };
 
   outputs = { self, nixpkgs }:
-    let
-      system = "x86_64-linux";
-      pkgs = import nixpkgs {
-        inherit system;
-        config = { allowUnfree = true; };
-      };
+    let system = "x86_64-linux";
     in {
-      nixosConfiguration = {
+      nixosConfigurations = {
         nixuwu = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit system; };
+          inherit system;
 
           modules = [ ./nixos/configuration.nix ];
         };

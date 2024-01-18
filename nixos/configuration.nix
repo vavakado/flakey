@@ -2,13 +2,10 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
-
-{
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+{ config, pkgs, ... }: {
+  imports = [ # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -67,7 +64,7 @@
     isNormalUser = true;
     description = "vavakado";
     extraGroups = [ "networkmanager" "wheel" "docker" ];
-    packages = with pkgs; [];
+    packages = with pkgs; [ ];
     shell = pkgs.fish;
   };
 
@@ -82,7 +79,7 @@
     zoxide
     lshw
     kitty
-    polybar
+    polybarFull
     rofi
     librewolf
     zellij
@@ -91,7 +88,7 @@
     picom
     feh
     git
-    emacs29 #nice number(and editor)
+    emacs29 # nice number(and editor)
     ripgrep
     coreutils
     fd
@@ -113,7 +110,7 @@
     tealdeer
   ];
 
-virtualisation.docker.enable = true;
+  virtualisation.docker.enable = true;
   programs.fish.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -132,15 +129,14 @@ virtualisation.docker.enable = true;
   services.openssh.enable = true;
 
   # some audio stuff
-security.rtkit.enable = true;
+  security.rtkit.enable = true;
   services.pipewire.enable = true;
   services.pipewire.audio.enable = true;
   services.pipewire.wireplumber.enable = true;
   services.pipewire.pulse.enable = true;
-services.pipewire.jack.enable = true;
-services.pipewire.alsa.enable = true;
-services.pipewire.alsa.support32Bit = true;
-
+  services.pipewire.jack.enable = true;
+  services.pipewire.alsa.enable = true;
+  services.pipewire.alsa.support32Bit = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
