@@ -11,10 +11,12 @@
         config = { allowUnfree = true; };
       };
     in {
-      nixosConfiguration.nixuwu = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit system; };
+      nixosConfiguration = {
+        nixuwu = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit system; };
 
-        modules = [ ./nixos/configuration.nix ];
+          modules = [ ./nixos/configuration.nix ];
+        };
       };
     };
 }
