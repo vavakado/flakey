@@ -6,13 +6,13 @@
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
+  i18n.supportedLocales = [ "all" ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   # enable the best feature of nix
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
   # nice~
   networking.hostName = "nixuwu"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -20,7 +20,6 @@
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
   # Enable networking
   networking.networkmanager.enable = true;
 
@@ -36,6 +35,8 @@
     noto-fonts-emoji
     (nerdfonts.override { fonts = [ "CascadiaCode" ]; })
   ];
+
+  programs.steam.enable = true;
 
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "he_IL.UTF-8";
@@ -73,41 +74,47 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    wget
-    zoxide
-    lshw
-    kitty
-    polybarFull
-    rofi
-    librewolf
-    zellij
-    moonlight-qt
-    rclone
-    picom
-    feh
-    git
-    emacs29 # nice number(and editor)
-    ripgrep
-    coreutils
-    fd
-    clang
-    rustup
-    sqlite-interactive
-    sqlite
-    nil
-    brightnessctl
-    neovide
-    gh
-    graphviz
-    nixfmt
-    gnumake
-    cmake
-    libtool
-    libvterm
-    pavucontrol
-    tealdeer
+  environment.systemPackages = [
+    pkgs.neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    pkgs.wget
+    pkgs.zoxide
+    pkgs.lshw
+    pkgs.kitty
+    pkgs.polybarFull
+    pkgs.rofi
+    pkgs.librewolf
+    pkgs.zellij
+    pkgs.moonlight-qt
+    pkgs.rclone
+    pkgs.picom
+    pkgs.feh
+    pkgs.git
+    pkgs.emacs-gtk # nice number(and editor)
+    pkgs.ripgrep
+    pkgs.coreutils
+    pkgs.fd
+    pkgs.clang
+    pkgs.rustup
+    pkgs.sqlite-interactive
+    pkgs.sqlite
+    pkgs.nil
+    pkgs.brightnessctl
+    pkgs.neovide
+    pkgs.gh
+    pkgs.graphviz
+    pkgs.nixfmt
+    pkgs.gnumake
+    pkgs.cmake
+    pkgs.libtool
+    pkgs.libvterm
+    pkgs.pavucontrol
+    pkgs.tealdeer
+    pkgs.vesktop
+    pkgs.anki-bin
+    pkgs.tor-browser
+    pkgs.ifuse
+    pkgs.qbittorrent
+    pkgs.fastfetch
   ];
 
   virtualisation.docker.enable = true;
