@@ -8,6 +8,9 @@
   ];
   i18n.supportedLocales = [ "all" ];
 
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [ pkg-config-unwrapped ];
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -22,6 +25,9 @@
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
   # Enable networking
   networking.networkmanager.enable = true;
+
+  services.xserver.wacom.enable = true;
+  services.xserver.digimend.enable = true;
 
   # Set your time zone.
   time.timeZone = "Europe/Moscow";
@@ -64,7 +70,8 @@
   users.users.vavakado = {
     isNormalUser = true;
     description = "vavakado";
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    extraGroups =
+      [ "kvm" "networkmanager" "wheel" "docker" "libvirtd" "input" "uinput" ];
     packages = with pkgs; [ ];
     shell = pkgs.fish;
   };
@@ -74,48 +81,102 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = [
-    pkgs.neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    pkgs.wget
-    pkgs.zoxide
-    pkgs.lshw
-    pkgs.kitty
-    pkgs.polybarFull
-    pkgs.rofi
-    pkgs.librewolf
-    pkgs.zellij
-    pkgs.moonlight-qt
-    pkgs.rclone
-    pkgs.picom
-    pkgs.feh
-    pkgs.git
-    pkgs.emacs-gtk # nice number(and editor)
-    pkgs.ripgrep
-    pkgs.coreutils
-    pkgs.fd
-    pkgs.clang
-    pkgs.rustup
-    pkgs.sqlite-interactive
-    pkgs.sqlite
-    pkgs.nil
-    pkgs.brightnessctl
-    pkgs.neovide
-    pkgs.gh
-    pkgs.graphviz
-    pkgs.nixfmt
-    pkgs.gnumake
-    pkgs.cmake
-    pkgs.libtool
-    pkgs.libvterm
-    pkgs.pavucontrol
-    pkgs.tealdeer
-    pkgs.vesktop
-    pkgs.anki-bin
-    pkgs.tor-browser
-    pkgs.ifuse
-    pkgs.qbittorrent
-    pkgs.fastfetch
+  environment.systemPackages = with pkgs; [
+    neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    wget
+    zoxide
+    lshw
+    kitty
+    polybarFull
+    rofi
+    librewolf
+    zellij
+    moonlight-qt
+    rclone
+    picom
+    feh
+    git
+    emacs-gtk # nice number(and editor)
+    ripgrep
+    coreutils
+    fd
+    clang
+    rustup
+    sqlite-interactive
+    sqlite
+    nil
+    brightnessctl
+    neovide
+    gh
+    graphviz
+    nixfmt
+    gnumake
+    cmake
+    libtool
+    libvterm
+    pavucontrol
+    tealdeer
+    vesktop
+    anki-bin
+    tor-browser
+    ifuse
+    qbittorrent
+    fastfetch
+    telegram-desktop
+    gnupg
+    pinentry
+    pinentry-emacs
+    spotify
+    mpv
+    ffmpeg-full
+    busybox
+    vscode
+    xf86_input_wacom
+    rnote
+    btop
+    kanata
   ];
+
+  hardware.opengl = {
+    enable = true;
+    driSupport = true;
+    driSupport32Bit = true;
+    extraPackages = with pkgs; [
+      intel-media-driver # LIBVA_DRIVER_NAME=iHD
+      vaapiIntel # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
+      vaapiVdpau
+      libvdpau-va-gl
+    ];
+  };
+
+  virtualisation.libvirtd.enable = true;
+  programs.virt-manager.enable = true;
+
+  services.xserver.videoDrivers = [ "nvidia" ];
+
+  hardware.nvidia = {
+
+    # Modesetting is required.
+    modesetting.enable = true;
+
+    # Nvidia power management. Experimental, and can cause sleep/suspend to fail.
+    powerManagement.enable = true;
+    # Fine-grained power management. Turns off GPU when not in use.
+    # Experimental and only works on modern Nvidia GPUs (Turing or newer).
+    powerManagement.finegrained = false;
+
+    # Enable the Nvidia settings menu,
+    # accessible via `nvidia-settings`.
+    nvidiaSettings = true;
+    prime = {
+      intelBusId = "PCI:0:2:0";
+      nvidiaBusId = "PCI:1:0:0";
+      offload = {
+        enable = true;
+        enableOffloadCmd = true;
+      };
+    };
+  };
 
   virtualisation.docker.enable = true;
   programs.fish.enable = true;
