@@ -95,8 +95,9 @@
     rclone
     picom
     feh
+    imv
     git
-    emacs-gtk # nice number(and editor)
+    emacs # nice number(and editor)
     ripgrep
     coreutils
     fd
@@ -106,7 +107,6 @@
     sqlite
     nil
     brightnessctl
-    neovide
     gh
     graphviz
     nixfmt
@@ -124,17 +124,14 @@
     fastfetch
     telegram-desktop
     gnupg
-    pinentry
-    pinentry-emacs
     spotify
     mpv
     ffmpeg-full
     busybox
-    vscode
-    xf86_input_wacom
     rnote
     btop
     kanata
+    gimp
   ];
 
   hardware.opengl = {
