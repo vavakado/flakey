@@ -5,6 +5,19 @@
   # manage.
   home.username = "vavakado";
   home.homeDirectory = "/home/vavakado";
+  
+qt.enable = true;
+qt.style.name = "adwaita-dark";
+qt.style.package = pkgs.adwaita-qt;
+qt.platformTheme = "gtk";
+
+gtk.enable = true;
+gtk.cursorTheme.package = pkgs.bibata-cursors;
+gtk.cursorTheme.name = "Bibata-Modern-Ice";
+gtk.theme.package = pkgs.adw-gtk3;
+gtk.theme.name = "adw-gtk3-dark";
+gtk.iconTheme.package = pkgs.gruvbox-plus-icons;
+gtk.iconTheme.name = "GruvboxPlus";
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release

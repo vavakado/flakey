@@ -132,6 +132,11 @@
     btop
     kanata
     gimp
+    xfce.thunar
+    openvpn
+    zapzap
+    dunst
+    flameshot
   ];
 
   hardware.opengl = {
