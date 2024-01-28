@@ -8,9 +8,6 @@
   ];
   i18n.supportedLocales = [ "all" ];
 
-  programs.nix-ld.enable = true;
-  programs.nix-ld.libraries = with pkgs; [ pkg-config-unwrapped ];
-
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -82,61 +79,65 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    wget
-    zoxide
-    lshw
-    kitty
-    polybarFull
-    rofi
-    librewolf
-    zellij
-    moonlight-qt
-    rclone
-    picom
-    feh
-    imv
-    git
-    emacs # nice number(and editor)
-    ripgrep
-    coreutils
-    fd
-    clang
-    rustup
-    sqlite-interactive
-    sqlite
-    nil
+    anki-bin
     brightnessctl
-    gh
-    graphviz
-    nixfmt
-    gnumake
+    btop
+    busybox
+    clang
     cmake
+    coreutils
+    dunst
+    emacs # nice number(and editor)
+    fastfetch
+    fd
+    feh
+    ffmpeg-full
+    flameshot
+    gh
+    gimp
+    git
+    gnumake
+    gnupg
+    graphviz
+    ifuse
+    imv
+    kanata
+    kitty
+    librewolf
     libtool
     libvterm
-    pavucontrol
-    tealdeer
-    vesktop
-    anki-bin
-    tor-browser
-    ifuse
-    qbittorrent
-    fastfetch
-    telegram-desktop
-    gnupg
-    spotify
+    lshw
+    monero-gui
+    moonlight-qt
     mpv
-    ffmpeg-full
-    busybox
-    rnote
-    btop
-    kanata
-    gimp
-    xfce.thunar
+    ncdu
+    neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    nil
+    nixfmt
     openvpn
+    pavucontrol
+    picom
+    polybarFull
+    python3
+    qbittorrent
+    rclone
+    ripgrep
+    rnote
+    rofi
+    rustup
+    spotdl
+    spotify
+    sqlite
+    sqlite-interactive
+    tealdeer
+    telegram-desktop
+    tor-browser
+    vesktop
+    wget
+    xfce.thunar
     zapzap
-    dunst
-    flameshot
+    zellij
+    zoxide
   ];
 
   hardware.opengl = {
@@ -212,7 +213,7 @@
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+  networking.firewall.enable = false;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
