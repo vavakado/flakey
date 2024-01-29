@@ -6,7 +6,13 @@
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
-  i18n.supportedLocales = [ "all" ];
+  i18n.supportedLocales = [
+    "C.UTF-8/UTF-8"
+    "en_US.UTF-8/UTF-8"
+    "ru_RU.UTF-8/UTF-8"
+    "ru_RU.KOI8-R/KOI8-R"
+    "he_IL.UTF-8/UTF-8"
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -30,7 +36,7 @@
   time.timeZone = "Europe/Moscow";
 
   # Select internationalisation properties.
-  i18n.defaultLocale = "en_IL";
+  i18n.defaultLocale = "en_US.UTF-8";
 
   fonts.packages = with pkgs; [
     noto-fonts
@@ -42,16 +48,22 @@
   programs.steam.enable = true;
 
   i18n.extraLocaleSettings = {
-    LC_ADDRESS = "he_IL.UTF-8";
-    LC_IDENTIFICATION = "he_IL.UTF-8";
-    LC_MEASUREMENT = "he_IL.UTF-8";
-    LC_MONETARY = "he_IL.UTF-8";
-    LC_NAME = "he_IL.UTF-8";
-    LC_NUMERIC = "he_IL.UTF-8";
-    LC_PAPER = "he_IL.UTF-8";
-    LC_TELEPHONE = "he_IL.UTF-8";
-    LC_TIME = "he_IL.UTF-8";
+    LC_ADDRESS = "en_US.UTF-8";
+    LC_IDENTIFICATION = "en_US.UTF-8";
+    LC_MEASUREMENT = "en_US.UTF-8";
+    LC_MONETARY = "en_US.UTF-8";
+    LC_NAME = "en_US.UTF-8";
+    LC_NUMERIC = "en_US.UTF-8";
+    LC_PAPER = "en_US.UTF-8";
+    LC_TELEPHONE = "en_US.UTF-8";
+    LC_TIME = "en_US.UTF-8";
   };
+
+  services.redshift.enable = true;
+  services.redshift.executable = "/bin/redshift-gtk";
+
+  location.longitude = 35.8938;
+  location.latitude = 56.8651;
 
   # Configure keymap in X11
   services.xserver = {
@@ -79,6 +91,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    alacritty
     anki-bin
     brightnessctl
     btop
@@ -132,6 +145,7 @@
     tealdeer
     telegram-desktop
     tor-browser
+    ungoogled-chromium
     vesktop
     wget
     xfce.thunar
@@ -201,19 +215,20 @@
 
   # some audio stuff
   security.rtkit.enable = true;
-  services.pipewire.enable = true;
-  services.pipewire.audio.enable = true;
-  services.pipewire.wireplumber.enable = true;
-  services.pipewire.pulse.enable = true;
-  services.pipewire.jack.enable = true;
-  services.pipewire.alsa.enable = true;
-  services.pipewire.alsa.support32Bit = true;
-
+  services.pipewire = {
+    enable = true;
+    audio.enable = true;
+    wireplumber.enable = true;
+    pulse.enable = true;
+    jack.enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+  };
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
-  networking.firewall.enable = false;
+  # networking.firewall.enable = false;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
