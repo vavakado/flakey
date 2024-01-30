@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }: {
+{ config, pkgs, lib, ... }: {
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
@@ -13,6 +13,8 @@
     "ru_RU.KOI8-R/KOI8-R"
     "he_IL.UTF-8/UTF-8"
   ];
+
+  systemd.services.NetworkManager-wait-online.enable = lib.mkForce false;
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -90,6 +92,7 @@
 
   # enable gpg the proper way
   programs.gnupg.agent.enable = true;
+  programs.gnupg.agent.pinentryFlavor = "gtk2";
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -150,6 +153,7 @@
     ungoogled-chromium
     vesktop
     wget
+    xclip
     xfce.thunar
     zapzap
     zellij
