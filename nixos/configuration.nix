@@ -35,7 +35,7 @@
   services.xserver.digimend.enable = true;
 
   # Set your time zone.
-  time.timeZone = "Europe/Moscow";
+  time.timeZone = "Asia/Jerusalem";
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
@@ -84,7 +84,7 @@
     extraGroups =
       [ "kvm" "networkmanager" "wheel" "docker" "libvirtd" "input" "uinput" ];
     packages = with pkgs; [ ];
-    shell = pkgs.fish;
+    shell = pkgs.bash;
   };
 
   # Allow unfree packages
@@ -99,9 +99,9 @@
   environment.systemPackages = with pkgs; [
     alacritty
     anki-bin
+    bat
     brightnessctl
     btop
-    busybox
     clang
     cmake
     coreutils
@@ -112,6 +112,8 @@
     feh
     ffmpeg-full
     flameshot
+    fzf
+    xournalpp
     gh
     gimp
     git
@@ -121,6 +123,7 @@
     imv
     kanata
     kitty
+    kubernetes
     librewolf
     libtool
     libvterm
@@ -147,10 +150,11 @@
     spotify
     sqlite
     sqlite-interactive
+    starship
+    syncthing
     tealdeer
     telegram-desktop
     tor-browser
-    ungoogled-chromium
     vesktop
     wget
     xclip
@@ -159,6 +163,11 @@
     zellij
     zoxide
   ];
+
+  services.syncthing = {
+    enable = true;
+    user = "vavakado";
+  };
 
   hardware.opengl = {
     enable = true;
@@ -202,7 +211,6 @@
   };
 
   virtualisation.docker.enable = true;
-  programs.fish.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

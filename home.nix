@@ -5,19 +5,19 @@
   # manage.
   home.username = "vavakado";
   home.homeDirectory = "/home/vavakado";
-  
-qt.enable = true;
-qt.style.name = "adwaita-dark";
-qt.style.package = pkgs.adwaita-qt;
-qt.platformTheme = "gtk";
 
-gtk.enable = true;
-gtk.cursorTheme.package = pkgs.bibata-cursors;
-gtk.cursorTheme.name = "Bibata-Modern-Ice";
-gtk.theme.package = pkgs.adw-gtk3;
-gtk.theme.name = "adw-gtk3-dark";
-gtk.iconTheme.package = pkgs.gruvbox-plus-icons;
-gtk.iconTheme.name = "GruvboxPlus";
+  qt.enable = true;
+  qt.style.name = "adwaita-dark";
+  qt.style.package = pkgs.adwaita-qt;
+  qt.platformTheme = "gtk";
+
+  gtk.enable = true;
+  gtk.cursorTheme.package = pkgs.bibata-cursors;
+  gtk.cursorTheme.name = "Bibata-Modern-Ice";
+  gtk.theme.package = pkgs.adw-gtk3;
+  gtk.theme.name = "adw-gtk3-dark";
+  gtk.iconTheme.package = pkgs.gruvbox-plus-icons;
+  gtk.iconTheme.name = "GruvboxPlus";
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -27,6 +27,19 @@ gtk.iconTheme.name = "GruvboxPlus";
   # want to update the value, then make sure to first check the Home Manager
   # release notes.
   home.stateVersion = "23.11"; # Please read the comment before changing.
+  #
+
+  services.mpd = {
+    enable = true;
+    musicDirectory = "/home/vavakado/music";
+    extraConfig = ''
+      audio_output {
+              type            "pipewire"
+              name            "PipeWire Sound Server"
+      }
+    '';
+  };
+  programs.ncmpcpp.enable = true;
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
@@ -47,6 +60,8 @@ gtk.iconTheme.name = "GruvboxPlus";
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
+    pkgs.mpc-cli
+    pkgs.picard
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
