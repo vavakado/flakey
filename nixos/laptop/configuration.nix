@@ -69,8 +69,8 @@
 
   # Configure keymap in X11
   services.xserver = {
-    layout = "us";
-    xkbVariant = "";
+    xkb.layout = "us";
+    xkb.variant = "";
     enable = true;
     windowManager.herbstluftwm.enable = true;
     displayManager.startx.enable = true;
@@ -151,7 +151,6 @@
     sqlite
     sqlite-interactive
     starship
-    syncthing
     tealdeer
     telegram-desktop
     tor-browser
@@ -163,11 +162,6 @@
     zellij
     zoxide
   ];
-
-  services.syncthing = {
-    enable = true;
-    user = "vavakado";
-  };
 
   hardware.opengl = {
     enable = true;
