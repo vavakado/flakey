@@ -16,15 +16,26 @@
           specialArgs = { inherit self system; };
 
           modules = [
-            ./nixos/configuration.nix
+            ./nixos/laptop/configuration.nix
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users.vavakado = import ./home.nix;
+              home-manager.users.vavakado = import ./nixos/laptop/home.nix;
+            }
+          ];
+        };
+        nixpc = nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit self system; };
 
-              # Optionally, use home-manager.extraSpecialArgs to pass
-              # arguments to home.nix
+          modules = [
+            ./nixos/desktop/configuration.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.vavakado = import ./nixos/desktop/home.nix;
             }
           ];
         };
