@@ -13,7 +13,7 @@
 
   gtk.enable = true;
   gtk.cursorTheme.package = pkgs.bibata-cursors;
-  gtk.cursorTheme.name = "Bibata-Modern-Ice";
+  gtk.cursorTheme.name = "Bibata-Modern-Classic";
   gtk.theme.package = pkgs.adw-gtk3;
   gtk.theme.name = "adw-gtk3-dark";
   gtk.iconTheme.package = pkgs.gruvbox-plus-icons;
@@ -33,10 +33,10 @@
     enable = true;
     musicDirectory = "/home/vavakado/Music";
     extraConfig = ''
-      audio_output {
-              type            "pipewire"
-              name            "PipeWire Sound Server"
-      }
+            audio_output {
+                    type            "pipewire"
+                    name            "PipeWire Sound Server"
+            }
     '';
   };
   programs.ncmpcpp.enable = true;
@@ -61,6 +61,7 @@
     #   echo "Hello, ${config.home.username}!"
     # '')
     pkgs.mpc-cli
+    pkgs.ranger
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
