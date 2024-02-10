@@ -111,6 +111,7 @@
     coreutils
     docker-compose
     emacs-gtk
+    sunshine
     eza
     fd
     feh
@@ -150,6 +151,7 @@
     starship
     telegram-desktop
     tmux
+    tor-browser # hehehe
     usbutils
     vesktop
     wget
@@ -168,6 +170,11 @@
 
   # so calibre can see my book
   services.udisks2.enable = true;
+
+  networking.firewall.allowedTCPPorts = [ 47984 47989 47990 48010 ];
+  networking.firewall.allowedUDPPorts = [ 47998 47999 47999 48000 ];
+  # this is awesome
+  services.zerotierone.enable = true;
 
   # i still can't decide between these three
   fonts.packages = with pkgs; [

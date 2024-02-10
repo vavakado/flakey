@@ -62,6 +62,7 @@
     # '')
     pkgs.mpc-cli
     pkgs.ranger
+    pkgs.mpd-sima
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
