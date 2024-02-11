@@ -103,6 +103,7 @@
   environment.systemPackages = with pkgs; [
     alacritty
     anki
+    blueman
     btop
     calibre
     clang
@@ -111,7 +112,6 @@
     coreutils
     docker-compose
     emacs-gtk
-    sunshine
     eza
     fd
     feh
@@ -149,6 +149,7 @@
     spotdl
     spotify
     starship
+    sunshine
     telegram-desktop
     tmux
     tor-browser # hehehe
@@ -171,6 +172,11 @@
   # so calibre can see my book
   services.udisks2.enable = true;
 
+  # bluepoop
+  hardware.bluetooth.enable = true;
+  services.blueman.enable = true;
+
+  # for sunshine
   networking.firewall.allowedTCPPorts = [ 47984 47989 47990 48010 ];
   networking.firewall.allowedUDPPorts = [ 47998 47999 47999 48000 ];
   # this is awesome
@@ -182,7 +188,7 @@
     noto-fonts-cjk
     noto-fonts-emoji
     (nerdfonts.override {
-      fonts = [ "CascadiaCode" "Iosevka" "JetBrainsMono" ];
+      fonts = [ "CascadiaCode" "VictorMono" "Iosevka" "JetBrainsMono" ];
     })
   ];
 
