@@ -25,6 +25,7 @@
       device = "nodev";
     };
   };
+  boot.kernelPackages = pkgs.linuxPackages_zen;
 
   # my windows11(tm) drive
   fileSystems."/home/vavakado/heh" = {
@@ -69,6 +70,7 @@
     windowManager.herbstluftwm.enable = true;
     displayManager.startx.enable = true;
     libinput.mouse.accelProfile = "flat";
+    libinput.mouse.accelSpeed = "0.5";
     libinput.enable = true;
     wacom.enable = true;
     digimend.enable = true;
@@ -150,6 +152,7 @@
     spotify
     starship
     sunshine
+    tealdeer
     telegram-desktop
     tmux
     tor-browser # hehehe
