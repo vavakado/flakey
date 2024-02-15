@@ -23,6 +23,7 @@
       efiSupport = true;
       useOSProber = true;
       device = "nodev";
+      splashImage = /home/vavakado/wallpaper.png;
     };
   };
   boot.kernelPackages = pkgs.linuxPackages_zen;
@@ -83,6 +84,7 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+    jack.enable = true;
   };
 
   # i guess you've seen my username
@@ -137,6 +139,7 @@
     nil
     nixfmt
     ntfs3g
+    p7zip
     pavucontrol
     picom
     polybarFull
@@ -154,14 +157,18 @@
     sunshine
     tealdeer
     telegram-desktop
+    thefuck
     tmux
     tor-browser # hehehe
+    trash-cli
+    unzip
     usbutils
     vesktop
     wget
     xfce.thunar
     xorg.xhost
     yuzu-early-access
+    zip
     zoxide
   ];
 
