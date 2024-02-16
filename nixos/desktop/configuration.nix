@@ -105,71 +105,67 @@
 
   # PACKAGES
   environment.systemPackages = with pkgs; [
-    alacritty
-    anki
-    blueman
-    btop
-    calibre
-    clang
-    cmake
-    conda
-    coreutils
-    docker-compose
-    emacs-gtk
-    eza
-    fd
-    feh
-    ffmpeg
-    flameshot
-    gh
-    git
-    gnumake
-    graphviz
-    gvfs
-    gzip
-    htop
-    imagemagickBig
-    imv
-    librewolf
-    libtool
-    libvterm
-    micromamba
-    mpv
-    neovim
-    nil
-    nixfmt
-    ntfs3g
-    p7zip
-    pavucontrol
-    picom
-    polybarFull
-    python3
-    qbittorrent
-    rclone
-    ripgrep
-    rofi
-    rustup
-    sccache
-    signal-desktop
-    spotdl
-    spotify
-    starship
-    sunshine
-    tealdeer
-    telegram-desktop
-    thefuck
-    tmux
+    alacritty # terminal
+    anki # hebrew
+    blueman # bluepoop
+    btop # system monitor
+    calibre # e-books
+    clang # doom emacs depend
+    cmake # libvterm for emacs
+    coreutils # emacs
+    docker-compose # bruh
+    emacs-gtk # the goat
+    eza # ls for zoomers
+    fd # fast
+    feh # wallpaper
+    ffmpeg # av1 all the way
+    flameshot # screeshit
+    gh # someday i will host my own gitlab instance
+    git # the best VCS
+    gnumake # bruh
+    graphviz # org-roam
+    gvfs # something
+    gzip # zip
+    imagemagickBig # webp is so small
+    imv # feh but better
+    librewolf # the best browser
+    libtool # vterm
+    libvterm # vterm
+    mpv # best music player
+    neovim # for editing configs
+    nil # nix lsp
+    nixfmt # nix fmt
+    ntfs3g # i still use windows(
+    p7zip # 7z
+    pavucontrol # audio
+    picom # vsync
+    polybarFull # the best X11 bar
+    python3 # hate it
+    qbittorrent # best torrent client
+    rclone # i still use drop box
+    ripgrep # zoomer grep
+    rofi # app launcher
+    rustup # r**t (i am not gay i swear)
+    sccache # ccache but better
+    signal-desktop # anon
+    spotdl # i still use spotify
+    spotify # premium((((
+    starship # bash but beautiful
+    sunshine # best remote desktop for linux
+    tealdeer # no man, i use tldr
+    telegram-desktop # friends
+    thefuck # fuck
+    tmux # best terminal multiplexer
     tor-browser # hehehe
-    trash-cli
-    unzip
-    usbutils
-    vesktop
-    wget
-    xfce.thunar
-    xorg.xhost
-    yuzu-early-access
-    zip
-    zoxide
+    trash-cli # optional dependeecy of something
+    unzip # dunno
+    usbutils # lsusb
+    vesktop # discord
+    wget # curl is worse
+    xfce.thunar # gui
+    yuzu-early-access # switch
+    zip # why
+    zoxide # cd for zoomers
   ];
 
   # docker
