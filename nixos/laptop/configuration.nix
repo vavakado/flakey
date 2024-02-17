@@ -133,6 +133,7 @@
     mpv
     ncdu
     neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    localsend
     nil
     nixfmt
     openvpn
@@ -231,8 +232,8 @@
     alsa.support32Bit = true;
   };
   # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
+  networking.firewall.allowedTCPPorts = [ 53317 ];
+  networking.firewall.allowedUDPPorts = [ 53317 ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
