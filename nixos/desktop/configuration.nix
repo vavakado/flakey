@@ -34,6 +34,11 @@
     fsType = "ntfs";
   };
 
+  fileSystems."/mnt/steamlib" = {
+    device = "/dev/disk/by-partuuid/8d7673f4-5d31-4aeb-9c27-ec00fe396db4";
+    fsType = "ext4";
+  };
+
   # gayming
   programs.steam.enable = true;
 
@@ -116,7 +121,7 @@
     docker-compose # bruh
     emacs-gtk # the goat
     eza # ls for zoomers
-    fd # fast
+    fd # find for zoomers
     feh # wallpaper
     ffmpeg # av1 all the way
     flameshot # screeshit
@@ -131,6 +136,7 @@
     librewolf # the best browser
     libtool # vterm
     libvterm # vterm
+    localsend # airdrop but free as in freedom
     mpv # best music player
     neovim # for editing configs
     nil # nix lsp
@@ -162,6 +168,7 @@
     usbutils # lsusb
     vesktop # discord
     wget # curl is worse
+    xclip # for stuff
     xfce.thunar # gui
     yuzu-early-access # switch
     zip # why
@@ -183,8 +190,8 @@
   services.blueman.enable = true;
 
   # for sunshine
-  networking.firewall.allowedTCPPorts = [ 47984 47989 47990 48010 ];
-  networking.firewall.allowedUDPPorts = [ 47998 47999 47999 48000 ];
+  networking.firewall.allowedTCPPorts = [ 53317 47984 47989 47990 48010 ];
+  networking.firewall.allowedUDPPorts = [ 53317 47998 47999 47999 48000 ];
   # this is awesome
   services.zerotierone.enable = true;
 
