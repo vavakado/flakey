@@ -113,7 +113,7 @@
     ffmpeg-full
     flameshot
     fzf
-    xournalpp
+    calibre
     gh
     gimp
     git
