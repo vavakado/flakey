@@ -127,6 +127,7 @@
     flameshot # screeshit
     gh # someday i will host my own gitlab instance
     git # the best VCS
+    gnome.nautilus
     gnumake # bruh
     graphviz # org-roam
     gvfs # something
@@ -148,7 +149,6 @@
     polybarFull # the best X11 bar
     python3 # hate it
     qbittorrent # best torrent client
-    texliveTeTeX
     rclone # i still use drop box
     ripgrep # zoomer grep
     rofi # app launcher
@@ -161,6 +161,7 @@
     sunshine # best remote desktop for linux
     tealdeer # no man, i use tldr
     telegram-desktop # friends
+    texliveTeTeX # for pdflatex
     thefuck # fuck
     tmux # best terminal multiplexer
     tor-browser # hehehe
@@ -172,7 +173,6 @@
     xclip # for stuff
     xfce.thunar # gui
     yuzu-early-access # switch
-    gnome.nautilus
     zip # why
     zoxide # cd for zoomers
   ];
