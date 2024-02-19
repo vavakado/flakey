@@ -16,8 +16,8 @@
   gtk.cursorTheme.name = "Bibata-Modern-Classic";
   gtk.theme.package = pkgs.adw-gtk3;
   gtk.theme.name = "adw-gtk3-dark";
-  gtk.iconTheme.package = pkgs.gruvbox-plus-icons;
-  gtk.iconTheme.name = "GruvboxPlus";
+  gtk.iconTheme.package = pkgs.rose-pine-icon-theme;
+  gtk.iconTheme.name = "rose-pine-moon-icons";
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release

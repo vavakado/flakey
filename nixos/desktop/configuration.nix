@@ -148,6 +148,7 @@
     polybarFull # the best X11 bar
     python3 # hate it
     qbittorrent # best torrent client
+    texliveTeTeX
     rclone # i still use drop box
     ripgrep # zoomer grep
     rofi # app launcher
@@ -171,6 +172,7 @@
     xclip # for stuff
     xfce.thunar # gui
     yuzu-early-access # switch
+    gnome.nautilus
     zip # why
     zoxide # cd for zoomers
   ];
@@ -190,8 +192,8 @@
   services.blueman.enable = true;
 
   # for sunshine
-  networking.firewall.allowedTCPPorts = [ 53317 47984 47989 47990 48010 ];
-  networking.firewall.allowedUDPPorts = [ 53317 47998 47999 47999 48000 ];
+  networking.firewall.allowedTCPPorts = [ 8080 53317 47984 47989 47990 48010 ];
+  networking.firewall.allowedUDPPorts = [ 8080 53317 47998 47999 47999 48000 ];
   # this is awesome
   services.zerotierone.enable = true;
 
