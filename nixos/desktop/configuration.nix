@@ -95,7 +95,8 @@
   # i guess you've seen my username
   users.users.vavakado = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "docker" ]; # Enable ‘sudo’ for the user.
+    extraGroups =
+      [ "wheel" "docker" "uinput" "input" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [ ];
   };
 
@@ -126,11 +127,13 @@
     ffmpeg # av1 all the way
     flameshot # screeshit
     gh # someday i will host my own gitlab instance
+    pkg-config
     git # the best VCS
     gnome.nautilus
     gnumake # bruh
     graphviz # org-roam
     gvfs # something
+    kanata
     gzip # zip
     imagemagickBig # webp is so small
     imv # feh but better
@@ -153,16 +156,15 @@
     ripgrep # zoomer grep
     rofi # app launcher
     rustup # r**t (i am not gay i swear)
+    rust-analyzer
     sccache # ccache but better
     signal-desktop # anon
     spotdl # i still use spotify
     spotify # premium((((
-    starship # bash but beautiful
     sunshine # best remote desktop for linux
     tealdeer # no man, i use tldr
     telegram-desktop # friends
     texliveTeTeX # for pdflatex
-    thefuck # fuck
     tmux # best terminal multiplexer
     tor-browser # hehehe
     trash-cli # optional dependeecy of something
@@ -174,7 +176,6 @@
     xfce.thunar # gui
     yuzu-early-access # switch
     zip # why
-    zoxide # cd for zoomers
   ];
 
   # docker

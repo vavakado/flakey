@@ -33,14 +33,44 @@
     enable = true;
     musicDirectory = "/home/vavakado/Music";
     extraConfig = ''
-            audio_output {
-                    type            "pipewire"
-                    name            "PipeWire Sound Server"
-            }
+      audio_output {
+              type            "pipewire"
+              name            "PipeWire Sound Server"
+      }
     '';
   };
   programs.ncmpcpp.enable = true;
+  programs = {
+    direnv = {
+      enable = true;
+      enableBashIntegration = true; # see note on other shells below
+      nix-direnv.enable = true;
+    };
 
+    bash = {
+      shellAliases = {
+        v = "nvim";
+        ls = "eza --icons=auto --color=auto";
+        ll = "eza --icons=auto --color=auto -l";
+        yeet = "sudo nixos-rebuild switch --flake /home/vavakado/flakey";
+        ".." = "cd ..";
+      };
+      enable = true; # see note on other shells below
+    };
+    zoxide = {
+      enable = true;
+      enableBashIntegration = true;
+    };
+    thefuck = {
+      enable = true;
+      enableBashIntegration = true;
+    };
+    starship = {
+      enable = true;
+      enableBashIntegration = true;
+    };
+  };
+  home.sessionPath = [ "$HOME/.cargo/bin" "$HOME/doom-emacs/" ];
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = [
