@@ -82,6 +82,9 @@
     digimend.enable = true;
   };
 
+  nixpkgs.config.permittedInsecurePackages =
+    [ "freeimage-unstable-2021-11-01" ];
+
   # Enable pipewire (pisswire)
   security.rtkit.enable = true;
   services.pipewire = {
@@ -127,16 +130,16 @@
     ffmpeg # av1 all the way
     flameshot # screeshit
     gh # someday i will host my own gitlab instance
-    pkg-config
     git # the best VCS
     gnome.nautilus
     gnumake # bruh
+    godot_4 # better than unity
     graphviz # org-roam
     gvfs # something
-    kanata
     gzip # zip
     imagemagickBig # webp is so small
     imv # feh but better
+    kanata
     librewolf # the best browser
     libtool # vterm
     libvterm # vterm
@@ -149,14 +152,15 @@
     p7zip # 7z
     pavucontrol # audio
     picom # vsync
+    pkg-config
     polybarFull # the best X11 bar
     python3 # hate it
     qbittorrent # best torrent client
     rclone # i still use drop box
     ripgrep # zoomer grep
     rofi # app launcher
-    rustup # r**t (i am not gay i swear)
     rust-analyzer
+    rustup # r**t (i am not gay i swear)
     sccache # ccache but better
     signal-desktop # anon
     spotdl # i still use spotify

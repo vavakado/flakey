@@ -19,6 +19,16 @@
   gtk.iconTheme.package = pkgs.rose-pine-icon-theme;
   gtk.iconTheme.name = "rose-pine-moon-icons";
 
+  services.mpd-discord-rpc.enable = true;
+  services.mpd-discord-rpc.settings = {
+    format = {
+      large_text = "$genre";
+      small_image = "";
+      timestamp = "left";
+      state = "$album by $artist";
+      details = "$title";
+    };
+  };
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
   # introduces backwards incompatible changes.
