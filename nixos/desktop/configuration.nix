@@ -115,7 +115,6 @@
   # PACKAGES
   environment.systemPackages = with pkgs; [
     alacritty # terminal
-    anki # hebrew
     blender # for godot
     blueman # bluepoop
     btop # system monitor
@@ -134,15 +133,12 @@
     gh # someday i will host my own gitlab instance
     gimp
     git # the best VCS
-    gnome.nautilus
     gnumake # bruh
     godot_4 # better than unity
     graphviz # org-roam
     gvfs # something
     gzip # zip
     imagemagickBig # webp is so small
-    imv # feh but better
-    kanata
     librewolf # the best browser
     libtool # vterm
     libvterm # vterm
@@ -173,11 +169,8 @@
     sunshine # best remote desktop for linux
     tealdeer # no man, i use tldr
     telegram-desktop # friends
-    texliveTeTeX # for pdflatex
     tmux # best terminal multiplexer
     tor-browser # hehehe
-    trash-cli # optional dependeecy of something
-    unzip # dunno
     usbutils # lsusb
     vesktop # discord
     wget # curl is worse
