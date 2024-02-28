@@ -14,6 +14,17 @@
     "he_IL.UTF-8/UTF-8"
   ];
 
+  specialisation = {
+    on-power.configuration = {
+      system.nixos.tags = [ "on-power" ];
+      hardware.nvidia = {
+        prime.offload.enable = lib.mkForce false;
+        prime.offload.enableOffloadCmd = lib.mkForce false;
+        prime.sync.enable = lib.mkForce true;
+      };
+    };
+  };
+
   systemd.services.NetworkManager-wait-online.enable = lib.mkForce false;
 
   # Bootloader.
@@ -30,6 +41,11 @@
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
   # Enable networking
   networking.networkmanager.enable = true;
+
+  services.tlp = {
+    enable = true;
+    settings = { DEVICES_TO_DISABLE_ON_STARTUP = "bluetooth"; };
+  };
 
   services.xserver.wacom.enable = true;
   services.xserver.digimend.enable = true;
@@ -108,7 +124,9 @@
     coreutils
     dunst
     emacs # nice number(and editor)
+    arandr
     fastfetch
+    smartmontools
     fd
     feh
     ffmpeg-full
@@ -120,7 +138,6 @@
     gnumake
     graphviz
     ifuse
-    imv
     kanata
     kitty
     kubernetes
