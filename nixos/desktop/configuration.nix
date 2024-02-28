@@ -116,6 +116,7 @@
   environment.systemPackages = with pkgs; [
     alacritty # terminal
     anki # hebrew
+    blender # for godot
     blueman # bluepoop
     btop # system monitor
     calibre # e-books
@@ -129,7 +130,9 @@
     feh # wallpaper
     ffmpeg # av1 all the way
     flameshot # screeshit
+    gdtoolkit
     gh # someday i will host my own gitlab instance
+    gimp
     git # the best VCS
     gnome.nautilus
     gnumake # bruh
@@ -165,6 +168,8 @@
     signal-desktop # anon
     spotdl # i still use spotify
     spotify # premium((((
+    sqlite
+    sqlite-interactive
     sunshine # best remote desktop for linux
     tealdeer # no man, i use tldr
     telegram-desktop # friends
