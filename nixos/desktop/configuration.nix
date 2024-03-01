@@ -2,9 +2,14 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 
-{
+let
+  sunshineOverride = pkgs.sunshine.overrideAttrs (prev: {
+    runtimeDependencies = prev.runtimeDependencies
+      ++ [ pkgs.linuxKernel.packages.linux_zen.nvidia_x11 ];
+  });
+in {
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
@@ -166,7 +171,8 @@
     spotify # premium((((
     sqlite
     sqlite-interactive
-    sunshine # best remote desktop for linux
+    #sunshine # best remote desktop for linux
+    sunshineOverride
     tealdeer # no man, i use tldr
     telegram-desktop # friends
     tmux # best terminal multiplexer
@@ -180,11 +186,29 @@
     zip # why
   ];
 
+  #locate
+  services.locate.package = pkgs.plocate;
+  services.locate.enable = true;
+  services.locate.localuser = null;
+
   # docker
   virtualisation.docker = {
     enableNvidia = true;
     enable = true;
     rootless.enable = true;
+  };
+
+  system.autoUpdate = {
+    enable = true;
+    flake = inputs.self.outPath;
+    flags = [
+      "--update-input"
+      "nixpkgs"
+      "--commit-lock-file"
+      "-L" # print build logs
+    ];
+    dates = "02:00";
+    randomizedDelaySec = "45min";
   };
 
   # so calibre can see my book
