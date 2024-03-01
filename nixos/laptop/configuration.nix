@@ -25,32 +25,26 @@
     };
   };
 
-  systemd.services.NetworkManager-wait-online.enable = lib.mkForce false;
+  boot.loader.grub.enable = true;
+  boot.loader.grub.devices = [ "nodev" ];
+  boot.loader.grub.efiInstallAsRemovable = true;
+  boot.loader.grub.efiSupport = true;
+  boot.loader.grub.useOSProber = true;
+  boot.supportedFilesystems = [ "zfs" ];
+  boot.zfs.requestEncryptionCredentials = true;
 
-  # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  services.zfs.autoScrub.enable = true;
+
+  networking.hostId = "af5cffb5";
   # enable the best feature of nix
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   # nice~
   networking.hostName = "nixuwu"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-  # Enable networking
   networking.networkmanager.enable = true;
-
   services.tlp = {
     enable = true;
     settings = { DEVICES_TO_DISABLE_ON_STARTUP = "bluetooth"; };
   };
-
-  services.xserver.wacom.enable = true;
-  services.xserver.digimend.enable = true;
-
-  # Set your time zone.
   time.timeZone = "Asia/Jerusalem";
 
   # Select internationalisation properties.
