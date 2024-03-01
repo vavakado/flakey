@@ -198,13 +198,12 @@ in {
     rootless.enable = true;
   };
 
-  system.autoUpdate = {
+  system.autoUpgrade = {
     enable = true;
-    flake = inputs.self.outPath;
+    flake = "/home/vavakado/flakey";
     flags = [
       "--update-input"
       "nixpkgs"
-      "--commit-lock-file"
       "-L" # print build logs
     ];
     dates = "02:00";
