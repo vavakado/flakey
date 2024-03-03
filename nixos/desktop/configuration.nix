@@ -74,6 +74,8 @@ in {
 
   # the goat
   i18n.defaultLocale = "en_US.UTF-8";
+  # i still use windows(
+  time.hardwareClockInLocalTime = true;
 
   # i would love to use wayland but herbsluftwm is way too amazing
   services.xserver = {
@@ -81,7 +83,7 @@ in {
     windowManager.herbstluftwm.enable = true;
     displayManager.startx.enable = true;
     libinput.mouse.accelProfile = "flat";
-    libinput.mouse.accelSpeed = "0.5";
+    libinput.mouse.accelSpeed = "0";
     libinput.enable = true;
     wacom.enable = true;
     digimend.enable = true;
@@ -146,6 +148,7 @@ in {
     imagemagickBig # webp is so small
     librewolf # the best browser
     libtool # vterm
+    pixelorama
     libvterm # vterm
     localsend # airdrop but free as in freedom
     mpv # best music player
@@ -206,7 +209,7 @@ in {
       "nixpkgs"
       "-L" # print build logs
     ];
-    dates = "02:00";
+    dates = "weekly";
     randomizedDelaySec = "45min";
   };
 
