@@ -129,7 +129,6 @@ in {
     clang # doom emacs depend
     cmake # libvterm for emacs
     coreutils # emacs
-    docker-compose # bruh
     emacs-gtk # the goat
     eza # ls for zoomers
     fd # find for zoomers
@@ -148,7 +147,6 @@ in {
     imagemagickBig # webp is so small
     librewolf # the best browser
     libtool # vterm
-    pixelorama
     libvterm # vterm
     localsend # airdrop but free as in freedom
     mpv # best music player
@@ -174,7 +172,6 @@ in {
     spotify # premium((((
     sqlite
     sqlite-interactive
-    #sunshine # best remote desktop for linux
     sunshineOverride
     tealdeer # no man, i use tldr
     telegram-desktop # friends
@@ -185,21 +182,15 @@ in {
     wget # curl is worse
     xclip # for stuff
     xfce.thunar # gui
-    yuzu-early-access # switch
+    ryujinx # 2.4 million dollars...
     zip # why
+    unzip # duh
   ];
 
   #locate
   services.locate.package = pkgs.plocate;
   services.locate.enable = true;
   services.locate.localuser = null;
-
-  # docker
-  virtualisation.docker = {
-    enableNvidia = true;
-    enable = true;
-    rootless.enable = true;
-  };
 
   system.autoUpgrade = {
     enable = true;
