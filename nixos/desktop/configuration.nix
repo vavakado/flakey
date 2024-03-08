@@ -118,7 +118,11 @@ in {
       pinentryFlavor = "gtk2";
     };
   };
-
+  # real vpn, not your privacy bs
+  services.zerotierone = {
+    enable = true;
+    joinNetworks = [ "856127940c59da11" ];
+  };
   # PACKAGES
   environment.systemPackages = with pkgs; [
     alacritty # terminal
@@ -214,8 +218,6 @@ in {
   # for sunshine
   networking.firewall.allowedTCPPorts = [ 8080 53317 47984 47989 47990 48010 ];
   networking.firewall.allowedUDPPorts = [ 8080 53317 47998 47999 47999 48000 ];
-  # this is awesome
-  services.zerotierone.enable = true;
 
   # i still can't decide between these three
   fonts.packages = with pkgs; [
