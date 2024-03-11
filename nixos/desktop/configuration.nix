@@ -106,7 +106,7 @@ in {
   users.users.vavakado = {
     isNormalUser = true;
     extraGroups =
-      [ "wheel" "docker" "uinput" "input" ]; # Enable ‘sudo’ for the user.
+      [ "wheel" "docker" "uinput" "fuse" "input" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [ ];
   };
 
@@ -126,6 +126,7 @@ in {
   # PACKAGES
   environment.systemPackages = with pkgs; [
     alacritty # terminal
+    anki
     blender # for godot
     blueman # bluepoop
     btop # system monitor
@@ -170,8 +171,10 @@ in {
     rofi # app launcher
     rust-analyzer
     rustup # r**t (i am not gay i swear)
+    ryujinx # 2.4 million dollars...
     sccache # ccache but better
     signal-desktop # anon
+    soundconverter
     spotdl # i still use spotify
     spotify # premium((((
     sqlite
@@ -181,14 +184,13 @@ in {
     telegram-desktop # friends
     tmux # best terminal multiplexer
     tor-browser # hehehe
+    unzip # duh
     usbutils # lsusb
     vesktop # discord
     wget # curl is worse
     xclip # for stuff
     xfce.thunar # gui
-    ryujinx # 2.4 million dollars...
     zip # why
-    unzip # duh
   ];
 
   #locate
