@@ -167,6 +167,7 @@ in {
     ntfs3g # i still use windows(
     p7zip # 7z
     pavucontrol # audio
+    conky
     picom # vsync
     pkg-config
     polybarFull # the best X11 bar
