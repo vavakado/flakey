@@ -105,8 +105,13 @@ in {
   # i guess you've seen my username
   users.users.vavakado = {
     isNormalUser = true;
-    extraGroups =
-      [ "wheel" "docker" "uinput" "fuse" "input" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [
+      "wheel"
+      "docker"
+      "uinput"
+      "fuse"
+      "input"
+    ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [ ];
   };
 
@@ -158,6 +163,7 @@ in {
     neovim # for editing configs
     nil # nix lsp
     nixfmt # nix fmt
+    nsxiv
     ntfs3g # i still use windows(
     p7zip # 7z
     pavucontrol # audio
