@@ -138,7 +138,9 @@ in {
     calibre # e-books
     clang # doom emacs depend
     cmake # libvterm for emacs
+    conky
     coreutils # emacs
+    docker-compose
     emacs-gtk # the goat
     eza # ls for zoomers
     fd # find for zoomers
@@ -155,6 +157,7 @@ in {
     gvfs # something
     gzip # zip
     imagemagickBig # webp is so small
+    jellyfin-media-player
     librewolf # the best browser
     libtool # vterm
     libvterm # vterm
@@ -167,7 +170,6 @@ in {
     ntfs3g # i still use windows(
     p7zip # 7z
     pavucontrol # audio
-    conky
     picom # vsync
     pkg-config
     polybarFull # the best X11 bar
@@ -180,9 +182,7 @@ in {
     rustup # r**t (i am not gay i swear)
     ryujinx # 2.4 million dollars...
     sccache # ccache but better
-    signal-desktop # anon
     soundconverter
-    spotdl # i still use spotify
     spotify # premium((((
     sqlite
     sqlite-interactive
@@ -190,8 +190,6 @@ in {
     tealdeer # no man, i use tldr
     telegram-desktop # friends
     tmux # best terminal multiplexer
-    tor-browser # hehehe
-    unzip # duh
     usbutils # lsusb
     vesktop # discord
     wget # curl is worse
@@ -225,8 +223,15 @@ in {
   services.blueman.enable = true;
 
   # for sunshine
-  networking.firewall.allowedTCPPorts = [ 8080 53317 47984 47989 47990 48010 ];
-  networking.firewall.allowedUDPPorts = [ 8080 53317 47998 47999 47999 48000 ];
+  networking.firewall.allowedTCPPorts =
+    [ 8080 8096 53317 47984 47989 47990 48010 ];
+  networking.firewall.allowedUDPPorts =
+    [ 8080 8096 53317 47998 47999 47999 48000 ];
+
+  services.tailscale = {
+    enable = true;
+    openFirewall = true;
+  };
 
   # i still can't decide between these three
   fonts.packages = with pkgs; [
@@ -237,6 +242,13 @@ in {
       fonts = [ "CascadiaCode" "VictorMono" "Iosevka" "JetBrainsMono" ];
     })
   ];
+
+  # docker
+  virtualisation.docker = {
+    enableNvidia = true;
+    enable = true;
+    rootless.enable = true;
+  };
 
   # Enable the sshd
   services.openssh.enable = true;

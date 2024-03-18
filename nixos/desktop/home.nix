@@ -94,6 +94,7 @@
     pkgs.mpd-sima
     pkgs.tesseract
     pkgs.picard
+    pkgs.pms
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
