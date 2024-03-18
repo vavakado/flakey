@@ -102,7 +102,7 @@
 
   # enable gpg the proper way
   programs.gnupg.agent.enable = true;
-  programs.gnupg.agent.pinentryFlavor = "gtk2";
+  programs.gnupg.agent.pinentryPackage = pkgs.pinentry-gtk2;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget

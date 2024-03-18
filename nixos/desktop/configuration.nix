@@ -120,7 +120,7 @@ in {
   programs.gnupg = {
     agent = {
       enable = true;
-      pinentryFlavor = "gtk2";
+      pinentryPackage = pkgs.pinentry-all;
     };
   };
   # real vpn, not your privacy bs
