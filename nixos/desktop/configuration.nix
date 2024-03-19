@@ -28,7 +28,6 @@ in {
       efiSupport = true;
       useOSProber = true;
       device = "nodev";
-      splashImage = /home/vavakado/wallpaper.png;
     };
   };
   boot.kernelPackages = pkgs.linuxPackages_zen;
@@ -77,21 +76,10 @@ in {
   # i still use windows(
   time.hardwareClockInLocalTime = true;
 
-  # i would love to use wayland but herbsluftwm is way too amazing
-  services.xserver = {
-    enable = true;
-    windowManager.herbstluftwm.enable = true;
-    displayManager.startx.enable = true;
-    libinput.mouse.accelProfile = "flat";
-    libinput.mouse.accelSpeed = "0";
-    libinput.enable = true;
-    wacom.enable = true;
-    digimend.enable = true;
-  };
-
-  nixpkgs.config.permittedInsecurePackages =
-    [ "freeimage-unstable-2021-11-01" ];
-
+  # no more x11
+  programs.hyprland.enable = true;
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+  environment.variables.WLR_NO_HARDWARE_CURSORS = "1";
   # Enable pipewire (pisswire)
   security.rtkit.enable = true;
   services.pipewire = {
@@ -138,18 +126,22 @@ in {
     calibre # e-books
     clang # doom emacs depend
     cmake # libvterm for emacs
-    conky
     coreutils # emacs
     docker-compose
-    emacs-gtk # the goat
+    emacs29-pgtk # the goat
     eza # ls for zoomers
     fd # find for zoomers
-    feh # wallpaper
     ffmpeg # av1 all the way
-    flameshot # screeshit
+    fractal
+    cinnamon.nemo
     gdtoolkit
     gh # someday i will host my own gitlab instance
-    gimp
+    wofi
+    swww
+    mako
+    wl-clipboard
+    kotatogram-desktop
+    waybar
     git # the best VCS
     gnumake # bruh
     godot_4 # better than unity
@@ -157,7 +149,6 @@ in {
     gvfs # something
     gzip # zip
     imagemagickBig # webp is so small
-    jellyfin-media-player
     librewolf # the best browser
     libtool # vterm
     libvterm # vterm
@@ -166,18 +157,15 @@ in {
     neovim # for editing configs
     nil # nix lsp
     nixfmt # nix fmt
-    nsxiv
     ntfs3g # i still use windows(
+    imv
     p7zip # 7z
     pavucontrol # audio
-    picom # vsync
     pkg-config
-    polybarFull # the best X11 bar
     python3 # hate it
     qbittorrent # best torrent client
     rclone # i still use drop box
     ripgrep # zoomer grep
-    rofi # app launcher
     rust-analyzer
     rustup # r**t (i am not gay i swear)
     ryujinx # 2.4 million dollars...
@@ -188,15 +176,19 @@ in {
     sqlite-interactive
     sunshineOverride
     tealdeer # no man, i use tldr
-    telegram-desktop # friends
     tmux # best terminal multiplexer
+    cava
     usbutils # lsusb
     vesktop # discord
     wget # curl is worse
-    xclip # for stuff
     xfce.thunar # gui
+    polkit
+    mate.mate-polkit
     zip # why
   ];
+  #security oooow
+  security.polkit.enable = true;
+  services.gnome.gnome-keyring.enable = true;
 
   #locate
   services.locate.package = pkgs.plocate;
