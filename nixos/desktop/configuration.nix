@@ -124,6 +124,8 @@ in {
     blueman # bluepoop
     btop # system monitor
     calibre # e-books
+    cava
+    cinnamon.nemo
     clang # doom emacs depend
     cmake # libvterm for emacs
     coreutils # emacs
@@ -133,35 +135,33 @@ in {
     fd # find for zoomers
     ffmpeg # av1 all the way
     fractal
-    cinnamon.nemo
     gdtoolkit
     gh # someday i will host my own gitlab instance
-    wofi
-    swww
-    mako
-    wl-clipboard
-    kotatogram-desktop
-    waybar
     git # the best VCS
     gnumake # bruh
     godot_4 # better than unity
     graphviz # org-roam
+    grim
     gvfs # something
     gzip # zip
     imagemagickBig # webp is so small
+    imv
+    kotatogram-desktop
     librewolf # the best browser
     libtool # vterm
     libvterm # vterm
     localsend # airdrop but free as in freedom
+    mako
+    mate.mate-polkit
     mpv # best music player
     neovim # for editing configs
     nil # nix lsp
     nixfmt # nix fmt
     ntfs3g # i still use windows(
-    imv
     p7zip # 7z
     pavucontrol # audio
     pkg-config
+    polkit
     python3 # hate it
     qbittorrent # best torrent client
     rclone # i still use drop box
@@ -170,20 +170,22 @@ in {
     rustup # r**t (i am not gay i swear)
     ryujinx # 2.4 million dollars...
     sccache # ccache but better
+    slurp
     soundconverter
     spotify # premium((((
     sqlite
     sqlite-interactive
     sunshineOverride
+    swww
     tealdeer # no man, i use tldr
     tmux # best terminal multiplexer
-    cava
     usbutils # lsusb
     vesktop # discord
+    waybar
     wget # curl is worse
+    wl-clipboard
+    wofi
     xfce.thunar # gui
-    polkit
-    mate.mate-polkit
     zip # why
   ];
   #security oooow
