@@ -28,7 +28,6 @@ in {
       efiSupport = true;
       useOSProber = true;
       device = "nodev";
-      splashImage = /home/vavakado/wallpaper.png;
     };
   };
   boot.kernelPackages = pkgs.linuxPackages_zen;
@@ -74,22 +73,13 @@ in {
 
   # the goat
   i18n.defaultLocale = "en_US.UTF-8";
+  # i still use windows(
+  time.hardwareClockInLocalTime = true;
 
-  # i would love to use wayland but herbsluftwm is way too amazing
-  services.xserver = {
-    enable = true;
-    windowManager.herbstluftwm.enable = true;
-    displayManager.startx.enable = true;
-    libinput.mouse.accelProfile = "flat";
-    libinput.mouse.accelSpeed = "0.5";
-    libinput.enable = true;
-    wacom.enable = true;
-    digimend.enable = true;
-  };
-
-  nixpkgs.config.permittedInsecurePackages =
-    [ "freeimage-unstable-2021-11-01" ];
-
+  # no more x11
+  programs.hyprland.enable = true;
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+  environment.variables.WLR_NO_HARDWARE_CURSORS = "1";
   # Enable pipewire (pisswire)
   security.rtkit.enable = true;
   services.pipewire = {
@@ -103,8 +93,13 @@ in {
   # i guess you've seen my username
   users.users.vavakado = {
     isNormalUser = true;
-    extraGroups =
-      [ "wheel" "docker" "uinput" "input" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [
+      "wheel"
+      "docker"
+      "uinput"
+      "fuse"
+      "input"
+    ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [ ];
   };
 
@@ -113,41 +108,51 @@ in {
   programs.gnupg = {
     agent = {
       enable = true;
-      pinentryFlavor = "gtk2";
+      pinentryPackage = pkgs.pinentry-all;
     };
   };
-
+  # real vpn, not your privacy bs
+  services.zerotierone = {
+    enable = true;
+    joinNetworks = [ "856127940c59da11" ];
+  };
   # PACKAGES
   environment.systemPackages = with pkgs; [
-    alacritty # terminal
+    anki
     blender # for godot
     blueman # bluepoop
     btop # system monitor
     calibre # e-books
+    cava
+    cinnamon.nemo
     clang # doom emacs depend
     cmake # libvterm for emacs
     coreutils # emacs
-    docker-compose # bruh
-    emacs-gtk # the goat
+    docker-compose
+    emacs29-pgtk # the goat
     eza # ls for zoomers
     fd # find for zoomers
-    feh # wallpaper
     ffmpeg # av1 all the way
-    flameshot # screeshit
+    fractal
     gdtoolkit
     gh # someday i will host my own gitlab instance
-    gimp
     git # the best VCS
     gnumake # bruh
     godot_4 # better than unity
     graphviz # org-roam
+    grim
     gvfs # something
     gzip # zip
     imagemagickBig # webp is so small
+    nomacs
+    kitty
+    kotatogram-desktop
     librewolf # the best browser
     libtool # vterm
     libvterm # vterm
     localsend # airdrop but free as in freedom
+    mako
+    mate.mate-polkit
     mpv # best music player
     neovim # for editing configs
     nil # nix lsp
@@ -155,48 +160,42 @@ in {
     ntfs3g # i still use windows(
     p7zip # 7z
     pavucontrol # audio
-    picom # vsync
     pkg-config
-    polybarFull # the best X11 bar
+    polkit
     python3 # hate it
     qbittorrent # best torrent client
     rclone # i still use drop box
     ripgrep # zoomer grep
-    rofi # app launcher
     rust-analyzer
     rustup # r**t (i am not gay i swear)
+    ryujinx # 2.4 million dollars...
     sccache # ccache but better
-    signal-desktop # anon
-    spotdl # i still use spotify
+    slurp
+    soundconverter
     spotify # premium((((
     sqlite
     sqlite-interactive
-    #sunshine # best remote desktop for linux
     sunshineOverride
+    swww
     tealdeer # no man, i use tldr
-    telegram-desktop # friends
     tmux # best terminal multiplexer
-    tor-browser # hehehe
     usbutils # lsusb
     vesktop # discord
+    waybar
     wget # curl is worse
-    xclip # for stuff
+    wl-clipboard
+    wofi
     xfce.thunar # gui
-    yuzu-early-access # switch
     zip # why
   ];
+  #security oooow
+  security.polkit.enable = true;
+  services.gnome.gnome-keyring.enable = true;
 
   #locate
   services.locate.package = pkgs.plocate;
   services.locate.enable = true;
   services.locate.localuser = null;
-
-  # docker
-  virtualisation.docker = {
-    enableNvidia = true;
-    enable = true;
-    rootless.enable = true;
-  };
 
   system.autoUpgrade = {
     enable = true;
@@ -206,7 +205,7 @@ in {
       "nixpkgs"
       "-L" # print build logs
     ];
-    dates = "02:00";
+    dates = "weekly";
     randomizedDelaySec = "45min";
   };
 
@@ -218,10 +217,15 @@ in {
   services.blueman.enable = true;
 
   # for sunshine
-  networking.firewall.allowedTCPPorts = [ 8080 53317 47984 47989 47990 48010 ];
-  networking.firewall.allowedUDPPorts = [ 8080 53317 47998 47999 47999 48000 ];
-  # this is awesome
-  services.zerotierone.enable = true;
+  networking.firewall.allowedTCPPorts =
+    [ 8080 8096 53317 47984 47989 47990 48010 ];
+  networking.firewall.allowedUDPPorts =
+    [ 8080 8096 53317 47998 47999 47999 48000 ];
+
+  services.tailscale = {
+    enable = true;
+    openFirewall = true;
+  };
 
   # i still can't decide between these three
   fonts.packages = with pkgs; [
@@ -232,6 +236,13 @@ in {
       fonts = [ "CascadiaCode" "VictorMono" "Iosevka" "JetBrainsMono" ];
     })
   ];
+
+  # docker
+  virtualisation.docker = {
+    enableNvidia = true;
+    enable = true;
+    rootless.enable = true;
+  };
 
   # Enable the sshd
   services.openssh.enable = true;
