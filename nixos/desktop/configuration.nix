@@ -118,7 +118,6 @@ in {
   };
   # PACKAGES
   environment.systemPackages = with pkgs; [
-    alacritty # terminal
     anki
     blender # for godot
     blueman # bluepoop
@@ -145,7 +144,8 @@ in {
     gvfs # something
     gzip # zip
     imagemagickBig # webp is so small
-    imv
+    nomacs
+    kitty
     kotatogram-desktop
     librewolf # the best browser
     libtool # vterm
