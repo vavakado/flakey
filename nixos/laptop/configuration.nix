@@ -71,13 +71,6 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  services.redshift.enable = true;
-  services.redshift.executable = "/bin/redshift-gtk";
-
-  location.longitude = 35.8938;
-  location.latitude = 56.8651;
-
-  # Configure keymap in X11
   services.xserver = {
     xkb.layout = "us";
     xkb.variant = "";
@@ -108,11 +101,9 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     alacritty
-    anki-bin
     bat
     brightnessctl
     btop
-    calibre
     clang
     cmake
     coreutils
@@ -127,27 +118,24 @@
     flameshot
     fzf
     gh
+    retroarchFull
     gimp
     git
     gnumake
     graphviz
     ifuse
-    kanata
-    kitty
-    kubernetes
+    eza
     librewolf
     libtool
     libvterm
     localsend
     lshw
-    monero-gui
     moonlight-qt
     mpv
     ncdu
     neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     nil
     nixfmt
-    openvpn
     pavucontrol
     picom
     polybarFull
@@ -155,14 +143,12 @@
     qbittorrent
     rclone
     ripgrep
-    rnote
     rofi
     rustup
     spotdl
     spotify
     sqlite
     sqlite-interactive
-    starship
     tealdeer
     telegram-desktop
     tor-browser
@@ -170,9 +156,6 @@
     wget
     xclip
     xfce.thunar
-    zapzap
-    zellij
-    zoxide
   ];
 
   hardware.opengl = {
@@ -189,24 +172,11 @@
 
   services.zerotierone.enable = true;
 
-  virtualisation.libvirtd.enable = true;
-  programs.virt-manager.enable = true;
-
   services.xserver.videoDrivers = [ "nvidia" ];
 
   hardware.nvidia = {
-
-    # Modesetting is required.
     modesetting.enable = true;
-
-    # Nvidia power management. Experimental, and can cause sleep/suspend to fail.
     powerManagement.enable = true;
-    # Fine-grained power management. Turns off GPU when not in use.
-    # Experimental and only works on modern Nvidia GPUs (Turing or newer).
-    powerManagement.finegrained = false;
-
-    # Enable the Nvidia settings menu,
-    # accessible via `nvidia-settings`.
     nvidiaSettings = true;
     prime = {
       intelBusId = "PCI:0:2:0";
@@ -217,20 +187,10 @@
       };
     };
   };
-
-  virtualisation.docker.enable = true;
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-
-  # List services that you want to enable:
   services.locate.package = pkgs.mlocate;
   services.locate.enable = true;
   services.locate.localuser = null;
-  # Enable the OpenSSH daemon.
   services.openssh.enable = true;
-
   # some audio stuff
   security.rtkit.enable = true;
   services.pipewire = {
@@ -245,15 +205,6 @@
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [ 53317 ];
   networking.firewall.allowedUDPPorts = [ 53317 ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
-
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.11"; # Did you read the comment?
 
 }
