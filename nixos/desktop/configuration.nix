@@ -12,8 +12,8 @@ let
 in {
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ./telegael.nix
   ];
-
   # enable flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
@@ -134,6 +134,7 @@ in {
     fd # find for zoomers
     ffmpeg # av1 all the way
     fractal
+    gamescope
     gdtoolkit
     gh # someday i will host my own gitlab instance
     git # the best VCS
@@ -144,24 +145,27 @@ in {
     gvfs # something
     gzip # zip
     imagemagickBig # webp is so small
-    nomacs
     kitty
-    kotatogram-desktop
     librewolf # the best browser
     libtool # vterm
     libvterm # vterm
     localsend # airdrop but free as in freedom
+    lutris
     mako
     mate.mate-polkit
     mpv # best music player
     neovim # for editing configs
+    newsflash
     nil # nix lsp
     nixfmt # nix fmt
+    nomacs
     ntfs3g # i still use windows(
+    obs-studio
     p7zip # 7z
     pavucontrol # audio
     pkg-config
     polkit
+    protonup-qt
     python3 # hate it
     qbittorrent # best torrent client
     rclone # i still use drop box
@@ -178,6 +182,7 @@ in {
     sunshineOverride
     swww
     tealdeer # no man, i use tldr
+    telegram-desktop
     tmux # best terminal multiplexer
     usbutils # lsusb
     vesktop # discord
@@ -185,6 +190,7 @@ in {
     wget # curl is worse
     wl-clipboard
     wofi
+    xdg-desktop-portal-wlr
     xfce.thunar # gui
     zip # why
   ];
@@ -232,6 +238,9 @@ in {
     noto-fonts
     noto-fonts-cjk
     noto-fonts-emoji
+    twitter-color-emoji
+    twemoji-color-font
+    emojione
     (nerdfonts.override {
       fonts = [ "CascadiaCode" "VictorMono" "Iosevka" "JetBrainsMono" ];
     })
