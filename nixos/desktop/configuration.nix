@@ -111,6 +111,17 @@ in {
       pinentryPackage = pkgs.pinentry-all;
     };
   };
+
+  # i both love and hate nixos
+  boot.binfmt.registrations.appimage = {
+    wrapInterpreterInShell = false;
+    interpreter = "${pkgs.appimage-run}/bin/appimage-run";
+    recognitionType = "magic";
+    offset = 0;
+    mask = "\\xff\\xff\\xff\\xff\\x00\\x00\\x00\\x00\\xff\\xff\\xff";
+    magicOrExtension = "\\x7fELF....AI\\x02";
+  };
+
   # real vpn, not your privacy bs
   services.zerotierone = {
     enable = true;
@@ -172,7 +183,6 @@ in {
     ripgrep # zoomer grep
     rust-analyzer
     rustup # r**t (i am not gay i swear)
-    ryujinx # 2.4 million dollars...
     sccache # ccache but better
     slurp
     soundconverter
