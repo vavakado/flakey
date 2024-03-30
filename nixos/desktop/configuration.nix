@@ -135,6 +135,7 @@ in {
     btop # system monitor
     calibre # e-books
     cava
+    gamemode
     cinnamon.nemo
     clang # doom emacs depend
     cmake # libvterm for emacs
@@ -151,6 +152,7 @@ in {
     git # the best VCS
     gnumake # bruh
     godot_4 # better than unity
+    mangohud
     graphviz # org-roam
     grim
     gvfs # something
