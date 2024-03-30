@@ -236,9 +236,9 @@ in {
 
   # for sunshine
   networking.firewall.allowedTCPPorts =
-    [ 8080 8096 53317 47984 47989 47990 48010 ];
+    [ 8080 4950 4955 8096 53317 47984 47989 47990 48010 ];
   networking.firewall.allowedUDPPorts =
-    [ 8080 8096 53317 47998 47999 47999 48000 ];
+    [ 8080 4950 4955 8096 53317 47998 47999 47999 48000 ];
 
   services.tailscale = {
     enable = true;
