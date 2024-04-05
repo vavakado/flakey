@@ -5,9 +5,10 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    nix-citizen.url = "github:LovingMelody/nix-citizen";
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager }:
+  outputs = { self, nixpkgs, home-manager, nix-citizen }@inputs :
     let system = "x86_64-linux";
     in {
       nixosConfigurations = {
@@ -27,7 +28,7 @@
         };
         nixpc = nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit self system; };
+          specialArgs = { inherit inputs; };
 
           modules = [
             ./nixos/desktop/configuration.nix

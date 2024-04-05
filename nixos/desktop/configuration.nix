@@ -16,32 +16,22 @@ in {
   ];
   # enable flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
-  # grub
-  boot.loader = {
-    efi = {
-      canTouchEfiVariables = true;
-      efiSysMountPoint = "/boot/efi";
-    };
-    grub = {
-      enable = true;
-      efiSupport = true;
-      useOSProber = true;
-      device = "nodev";
-    };
+  services.gvfs.enable = true;
+  boot.loader.grub = {
+    enable = true;
+    devices = [ "nodev" ];
+    efiInstallAsRemovable = true;
+    efiSupport = true;
+    useOSProber = true;
   };
-  boot.kernelPackages = pkgs.linuxPackages_zen;
-
-  # my windows11(tm) drive
-  fileSystems."/home/vavakado/heh" = {
-    device = "/dev/disk/by-partuuid/2be7643d-46e7-96e2-d242-f873181ab5b4";
-    fsType = "ntfs";
+  boot.supportedFilesystems = [ "zfs" ];
+  networking.hostId = "b93f3baf";
+  services.zfs.autoScrub.enable = true;
+  boot.kernel.sysctl = {
+    "vm.max_map_count" = 16777216;
+    "fs.file-max" = 524288;
   };
-
-  fileSystems."/mnt/steamlib" = {
-    device = "/dev/disk/by-partuuid/8d7673f4-5d31-4aeb-9c27-ec00fe396db4";
-    fsType = "ext4";
-  };
+  networking.extraHosts = "127.0.0.1 modules-cdn.eac-prod.on.epicgames.com";
 
   # gayming
   programs.steam.enable = true;
@@ -70,6 +60,8 @@ in {
     nvidiaSettings = true;
     forceFullCompositionPipeline = true;
   };
+
+  programs.nix-ld.enable = true;
 
   # the goat
   i18n.defaultLocale = "en_US.UTF-8";
@@ -132,10 +124,10 @@ in {
     anki
     blender # for godot
     blueman # bluepoop
+    gvfs
     btop # system monitor
     calibre # e-books
     cava
-    gamemode
     cinnamon.nemo
     clang # doom emacs depend
     cmake # libvterm for emacs
@@ -145,26 +137,31 @@ in {
     eza # ls for zoomers
     fd # find for zoomers
     ffmpeg # av1 all the way
+    filezilla
     fractal
+    gamemode
     gamescope
     gdtoolkit
     gh # someday i will host my own gitlab instance
     git # the best VCS
     gnumake # bruh
     godot_4 # better than unity
-    mangohud
     graphviz # org-roam
     grim
     gvfs # something
     gzip # zip
     imagemagickBig # webp is so small
+    inputs.nix-citizen.packages.${system}.lug-helper
+    inputs.nix-citizen.packages.${system}.star-citizen-helper
     kitty
     librewolf # the best browser
     libtool # vterm
     libvterm # vterm
     localsend # airdrop but free as in freedom
+    logiops
     lutris
     mako
+    mangohud
     mate.mate-polkit
     mpv # best music player
     neovim # for editing configs
@@ -198,13 +195,18 @@ in {
     tmux # best terminal multiplexer
     usbutils # lsusb
     vesktop # discord
+    vkd3d-proton
     waybar
     wget # curl is worse
+    wine64Packages.waylandFull
+    winePackages.waylandFull
+    winetricks
     wl-clipboard
     wofi
     xdg-desktop-portal-wlr
     xfce.thunar # gui
     zip # why
+jmtpfs
   ];
   #security oooow
   security.polkit.enable = true;
