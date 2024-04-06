@@ -118,8 +118,7 @@
     flameshot
     fzf
     gh
-    retroarchFull
-    gimp
+    jmtpfs
     git
     gnumake
     graphviz
@@ -145,7 +144,6 @@
     ripgrep
     rofi
     rustup
-    spotdl
     spotify
     sqlite
     sqlite-interactive
@@ -157,6 +155,8 @@
     xclip
     xfce.thunar
   ];
+
+  programs.dconf.enable = true;
 
   hardware.opengl = {
     enable = true;
