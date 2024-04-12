@@ -91,6 +91,7 @@ in {
       "uinput"
       "fuse"
       "input"
+      "libvirtd"
     ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [ ];
   };
@@ -119,16 +120,22 @@ in {
     enable = true;
     joinNetworks = [ "856127940c59da11" ];
   };
+
+  virtualisation.libvirtd.enable = true;
+  programs.virt-manager.enable = true;
+
   # PACKAGES
   environment.systemPackages = with pkgs; [
+    android-file-transfer
     anki
     blender # for godot
     blueman # bluepoop
-    gvfs
     btop # system monitor
     calibre # e-books
     cava
-    cinnamon.nemo
+    cinnamon.nemo-with-extensions
+cinnamon.nemo-fileroller
+gnome.file-roller
     clang # doom emacs depend
     cmake # libvterm for emacs
     coreutils # emacs
@@ -148,11 +155,13 @@ in {
     godot_4 # better than unity
     graphviz # org-roam
     grim
+    gvfs
     gvfs # something
     gzip # zip
     imagemagickBig # webp is so small
     inputs.nix-citizen.packages.${system}.lug-helper
     inputs.nix-citizen.packages.${system}.star-citizen-helper
+    jmtpfs
     kitty
     librewolf # the best browser
     libtool # vterm
@@ -161,6 +170,7 @@ in {
     logiops
     lutris
     mako
+    dwarfs
     mangohud
     mate.mate-polkit
     mpv # best music player
@@ -206,11 +216,17 @@ in {
     xdg-desktop-portal-wlr
     xfce.thunar # gui
     zip # why
-jmtpfs
   ];
   #security oooow
   security.polkit.enable = true;
   services.gnome.gnome-keyring.enable = true;
+
+  # i use the best mouse ever
+  hardware.logitech.wireless = {
+    enable = true;
+    enableGraphical = true;
+  };
+  hardware.uinput.enable = true;
 
   #locate
   services.locate.package = pkgs.plocate;
