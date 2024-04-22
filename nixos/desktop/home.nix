@@ -60,7 +60,7 @@
     };
   };
   home.sessionPath = [ "$HOME/.cargo/bin" "$HOME/.config/emacs/bin/" ];
-  home.packages = with pkgs; [ mpc-cli ranger mpd-sima picard neovide neovim ];
+  home.packages = with pkgs; [ mpc-cli ranger mpd-sima picard neovide neovim calibre ];
 
   #home.sessionVariables = { EDITOR = "emacs -nw"; };
   programs.home-manager.enable = true;
