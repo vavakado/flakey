@@ -1,10 +1,10 @@
 { config, pkgs, ... }:
-
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "vavakado";
   home.homeDirectory = "/home/vavakado";
+
 
   qt.enable = true;
   qt.style.name = "adwaita-dark";
@@ -19,14 +19,7 @@
   gtk.iconTheme.package = pkgs.gnome.adwaita-icon-theme;
   gtk.iconTheme.name = "Adwaita";
 
-  # This value determines the Home Manager release that your configuration is
-  # compatible with. This helps avoid breakage when a new Home Manager release
-  # introduces backwards incompatible changes.
-  #
-  # You should not change this value, even if you update Home Manager. If you do
-  # want to update the value, then make sure to first check the Home Manager
-  # release notes.
-  home.stateVersion = "23.11"; # Please read the comment before changing.
+  home.stateVersion = "23.11"; # don't change it bro
 
   services.mpd = {
     enable = true;
@@ -52,6 +45,7 @@
         ls = "eza --icons=auto --color=auto";
         ll = "eza --icons=auto --color=auto -l";
         yeet = "sudo nixos-rebuild switch --flake /home/vavakado/flakey";
+        yaat = "home-manager switch --flake /home/vavakado/flakey";
         ".." = "cd ..";
       };
       enable = true; # see note on other shells below
@@ -66,7 +60,7 @@
     };
   };
   home.sessionPath = [ "$HOME/.cargo/bin" "$HOME/.config/emacs/bin/" ];
-  home.packages = with pkgs; [ mpc-cli ranger mpd-sima picard ];
+  home.packages = with pkgs; [ mpc-cli ranger mpd-sima picard neovide neovim ];
 
   #home.sessionVariables = { EDITOR = "emacs -nw"; };
   programs.home-manager.enable = true;

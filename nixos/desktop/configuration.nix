@@ -132,7 +132,6 @@ in {
     blueman # bluepoop
     bottom
     btop # system monitor
-    calibre # e-books
     cinnamon.nemo-fileroller
     cinnamon.nemo-with-extensions
     docker-compose
@@ -170,8 +169,6 @@ in {
     mangohud
     mate.mate-polkit
     mpv # best music player
-    neovide
-    neovim # for editing configs
     newsflash
     nil # nix lsp
     nixfmt # nix fmt
@@ -286,6 +283,7 @@ in {
     enableNvidia = true;
     enable = true;
     rootless.enable = true;
+    liveRestore = false;
   };
 
   # Enable the sshd

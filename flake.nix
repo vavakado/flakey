@@ -6,9 +6,10 @@
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nix-citizen.url = "github:LovingMelody/nix-citizen";
+    neorg-overlay.url = "github:nvim-neorg/nixpkgs-neorg-overlay";
   };
 
-  outputs = { self, nixpkgs, home-manager, nix-citizen }@inputs :
+  outputs = { self, nixpkgs, home-manager, nix-citizen, neorg-overlay }@inputs:
     let system = "x86_64-linux";
     in {
       nixosConfigurations = {
@@ -30,16 +31,13 @@
           inherit system;
           specialArgs = { inherit inputs; };
 
-          modules = [
-            ./nixos/desktop/configuration.nix
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.vavakado = import ./nixos/desktop/home.nix;
-            }
-          ];
+          modules = [ ./nixos/desktop/configuration.nix ];
         };
+      };
+      homeConfigurations.vavakado = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.${system};
+        modules =
+          [ ./nixos/desktop/home.nix ];
       };
     };
 }
