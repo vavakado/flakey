@@ -130,17 +130,13 @@ in {
     anki
     blender # for godot
     blueman # bluepoop
+    bottom
     btop # system monitor
     calibre # e-books
-    cava
+    cinnamon.nemo-fileroller
     cinnamon.nemo-with-extensions
-cinnamon.nemo-fileroller
-gnome.file-roller
-    clang # doom emacs depend
-    cmake # libvterm for emacs
-    coreutils # emacs
     docker-compose
-    emacs29-pgtk # the goat
+    dwarfs
     eza # ls for zoomers
     fd # find for zoomers
     ffmpeg # av1 all the way
@@ -151,29 +147,30 @@ gnome.file-roller
     gdtoolkit
     gh # someday i will host my own gitlab instance
     git # the best VCS
+    gnome.file-roller
     gnumake # bruh
     godot_4 # better than unity
     graphviz # org-roam
+    greetd.tuigreet
     grim
-    gvfs
     gvfs # something
     gzip # zip
+    handbrake
     imagemagickBig # webp is so small
     inputs.nix-citizen.packages.${system}.lug-helper
     inputs.nix-citizen.packages.${system}.star-citizen-helper
+    jftui
     jmtpfs
     kitty
     librewolf # the best browser
-    libtool # vterm
-    libvterm # vterm
     localsend # airdrop but free as in freedom
     logiops
     lutris
     mako
-    dwarfs
     mangohud
     mate.mate-polkit
     mpv # best music player
+    neovide
     neovim # for editing configs
     newsflash
     nil # nix lsp
@@ -191,7 +188,7 @@ gnome.file-roller
     rclone # i still use drop box
     ripgrep # zoomer grep
     rust-analyzer
-    rustup # r**t (i am not gay i swear)
+    rustup # r**t (i am not trans i swear)
     sccache # ccache but better
     slurp
     soundconverter
@@ -220,6 +217,14 @@ gnome.file-roller
   #security oooow
   security.polkit.enable = true;
   services.gnome.gnome-keyring.enable = true;
+
+  services.greetd.enable = true;
+  services.greetd.settings = {
+    default_session = {
+      command = "${pkgs.greetd.tuigreet}/bin/tuigreet --cmd Hyprland";
+      user = "vavakado";
+    };
+  };
 
   # i use the best mouse ever
   hardware.logitech.wireless = {

@@ -68,6 +68,6 @@
   home.sessionPath = [ "$HOME/.cargo/bin" "$HOME/.config/emacs/bin/" ];
   home.packages = with pkgs; [ mpc-cli ranger mpd-sima picard ];
 
-  home.sessionVariables = { EDITOR = "emacs -nw"; };
+  #home.sessionVariables = { EDITOR = "emacs -nw"; };
   programs.home-manager.enable = true;
 }
