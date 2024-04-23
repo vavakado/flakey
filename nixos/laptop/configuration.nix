@@ -90,6 +90,9 @@
     shell = pkgs.bash;
   };
 
+  virtualisation.libvirtd.enable = true;
+  programs.virt-manager.enable = true;
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
@@ -104,26 +107,23 @@
     bat
     brightnessctl
     btop
+    cinnamon.nemo
     clang
     cmake
     coreutils
     dunst
     emacs # nice number(and editor)
-    arandr
-    fastfetch
-    smartmontools
+    eza
     fd
     feh
-    ffmpeg-full
     flameshot
     fzf
     gh
-    jmtpfs
     git
     gnumake
     graphviz
-    ifuse
-    eza
+    jellyfin-media-player
+    jmtpfs
     librewolf
     libtool
     libvterm
@@ -135,6 +135,7 @@
     neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     nil
     nixfmt
+    nomacs
     pavucontrol
     picom
     polybarFull
@@ -144,16 +145,15 @@
     ripgrep
     rofi
     rustup
+    smartmontools
     spotify
     sqlite
     sqlite-interactive
     tealdeer
     telegram-desktop
-    tor-browser
     vesktop
     wget
     xclip
-    xfce.thunar
   ];
 
   programs.dconf.enable = true;
