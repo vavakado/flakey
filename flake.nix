@@ -6,10 +6,9 @@
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nix-citizen.url = "github:LovingMelody/nix-citizen";
-    neorg-overlay.url = "github:nvim-neorg/nixpkgs-neorg-overlay";
   };
 
-  outputs = { self, nixpkgs, home-manager, nix-citizen, neorg-overlay }@inputs:
+  outputs = { self, nixpkgs, home-manager, nix-citizen}@inputs:
     let system = "x86_64-linux";
     in {
       nixosConfigurations = {

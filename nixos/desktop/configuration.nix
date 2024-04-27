@@ -24,6 +24,10 @@ in {
     efiSupport = true;
     useOSProber = true;
   };
+services.xserver.windowManager.herbstluftwm.enable = true;
+services.xserver.displayManager.startx.enable = true;
+services.xserver.enable = true;
+systemd.network.wait-online.enable = false;
   boot.supportedFilesystems = [ "zfs" ];
   networking.hostId = "b93f3baf";
   services.zfs.autoScrub.enable = true;
@@ -69,9 +73,9 @@ in {
   time.hardwareClockInLocalTime = true;
 
   # no more x11
-  programs.hyprland.enable = true;
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
-  environment.variables.WLR_NO_HARDWARE_CURSORS = "1";
+  programs.hyprland.enable = false; #wait for may 15
+  #environment.sessionVariables.NIXOS_OZONE_WL = "1";
+  #environment.variables.WLR_NO_HARDWARE_CURSORS = "1";
   # Enable pipewire (pisswire)
   security.rtkit.enable = true;
   services.pipewire = {
@@ -93,7 +97,6 @@ in {
       "input"
       "libvirtd"
     ]; # Enable ‘sudo’ for the user.
-    packages = with pkgs; [ ];
   };
 
   # dunno
@@ -124,6 +127,13 @@ in {
   virtualisation.libvirtd.enable = true;
   programs.virt-manager.enable = true;
 
+  programs.nh = {
+    enable = true;
+    clean.enable = true;
+    clean.extraArgs = "--keep-since 4d --keep 3";
+    flake = "/home/vavakado/flakey";
+  };
+
   # PACKAGES
   environment.systemPackages = with pkgs; [
     android-file-transfer
@@ -131,6 +141,7 @@ in {
     blender # for godot
     blueman # bluepoop
     bottom
+    rofi
     btop # system monitor
     cinnamon.nemo-fileroller
     cinnamon.nemo-with-extensions
@@ -164,6 +175,10 @@ in {
     librewolf # the best browser
     localsend # airdrop but free as in freedom
     logiops
+polybarFull
+flameshot
+picom
+feh
     lutris
     mako
     mangohud
@@ -202,6 +217,7 @@ in {
     vkd3d-proton
     waybar
     wget # curl is worse
+    xclip
     wine64Packages.waylandFull
     winePackages.waylandFull
     winetricks
@@ -218,11 +234,12 @@ in {
   services.greetd.enable = true;
   services.greetd.settings = {
     default_session = {
-      command = "${pkgs.greetd.tuigreet}/bin/tuigreet --cmd Hyprland";
+      command = "${pkgs.greetd.tuigreet}/bin/tuigreet --cmd startx";
       user = "vavakado";
     };
   };
-
+     services.xserver.libinput.mouse.accelSpeed = "0.0";
+services.xserver.libinput.mouse.accelProfile = "flat";
   # i use the best mouse ever
   hardware.logitech.wireless = {
     enable = true;

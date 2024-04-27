@@ -1,10 +1,8 @@
-{ config, pkgs, ... }:
-{
+{ config, pkgs, ... }: {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "vavakado";
   home.homeDirectory = "/home/vavakado";
-
 
   qt.enable = true;
   qt.style.name = "adwaita-dark";
@@ -31,8 +29,10 @@
       }
     '';
   };
-  programs.ncmpcpp.enable = true;
+
   programs = {
+    ncmpcpp.enable = true;
+
     direnv = {
       enable = true;
       enableBashIntegration = true; # see note on other shells below
@@ -58,10 +58,26 @@
       enable = true;
       enableBashIntegration = true;
     };
-  };
-  home.sessionPath = [ "$HOME/.cargo/bin" "$HOME/.config/emacs/bin/" ];
-  home.packages = with pkgs; [ mpc-cli ranger mpd-sima picard neovide neovim calibre ];
 
-  #home.sessionVariables = { EDITOR = "emacs -nw"; };
-  programs.home-manager.enable = true;
+    #home.sessionVariables = { EDITOR = "nvim"; };
+    home-manager.enable = true;
+  };
+  home.sessionPath = [ "$HOME/.cargo/bin" ];
+  home.packages = with pkgs; [
+    mpc-cli
+    ranger
+    mpd-sima
+    picard
+    neovide
+    neovim
+    mitschemeX11
+    guile
+    marksman
+    prettierd
+    statix
+    deadnix
+    catimg
+    nodejs_21
+    calibre
+  ];
 }
