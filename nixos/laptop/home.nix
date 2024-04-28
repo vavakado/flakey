@@ -43,11 +43,16 @@
       enable = true;
       enableBashIntegration = true;
     };
+    neovim.enable = true;
+neovim.plugins = [
+   pkgs.vimPlugins.nvim-treesitter
+ ];
   };
 
   home.stateVersion = "23.11"; # Please read the comment before changing.
-  home.packages = [ pkgs.mpc-cli pkgs.picard ];
-  home.sessionVariables = { EDITOR = "emacs"; };
+  home.packages =
+   with pkgs; [ mpc-cli nodejs_21 lazygit ripgrep pkgs.kanata pkgs.nh ];
+  home.sessionVariables = { EDITOR = "nvim"; };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;

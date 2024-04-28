@@ -96,9 +96,13 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  # add uinput for kanata
+  hardware.uinput.enable = true;
+
   # enable gpg the proper way
   programs.gnupg.agent.enable = true;
   programs.gnupg.agent.pinentryPackage = pkgs.pinentry-gtk2;
+
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -132,8 +136,6 @@
     moonlight-qt
     mpv
     ncdu
-    neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    nil
     nixfmt
     nomacs
     pavucontrol
