@@ -13,6 +13,7 @@ in {
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ./telegael.nix
+    ./gpu-passthrough.nix
   ];
   # enable flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -124,9 +125,6 @@ systemd.network.wait-online.enable = false;
     joinNetworks = [ "856127940c59da11" ];
   };
 
-  virtualisation.libvirtd.enable = true;
-  programs.virt-manager.enable = true;
-
   programs.nh = {
     enable = true;
     clean.enable = true;
@@ -136,21 +134,27 @@ systemd.network.wait-online.enable = false;
 
   # PACKAGES
   environment.systemPackages = with pkgs; [
+    #wofi #wayland
     android-file-transfer
     anki
+    unzip
+    
     blender # for godot
     blueman # bluepoop
     bottom
-    rofi
     btop # system monitor
     cinnamon.nemo-fileroller
     cinnamon.nemo-with-extensions
+    clang
+    distrobox
     docker-compose
     dwarfs
     eza # ls for zoomers
     fd # find for zoomers
+    feh
     ffmpeg # av1 all the way
     filezilla
+    flameshot
     fractal
     gamemode
     gamescope
@@ -175,10 +179,6 @@ systemd.network.wait-online.enable = false;
     librewolf # the best browser
     localsend # airdrop but free as in freedom
     logiops
-polybarFull
-flameshot
-picom
-feh
     lutris
     mako
     mangohud
@@ -192,13 +192,16 @@ feh
     obs-studio
     p7zip # 7z
     pavucontrol # audio
+    picom
     pkg-config
     polkit
+    polybarFull
     protonup-qt
     python3 # hate it
     qbittorrent # best torrent client
     rclone # i still use drop box
     ripgrep # zoomer grep
+    rofi
     rust-analyzer
     rustup # r**t (i am not trans i swear)
     sccache # ccache but better
@@ -213,24 +216,25 @@ feh
     telegram-desktop
     tmux # best terminal multiplexer
     usbutils # lsusb
+    spicetify-cli
     vesktop # discord
     vkd3d-proton
     waybar
     wget # curl is worse
-    xclip
-    wine64Packages.waylandFull
-    winePackages.waylandFull
+    wine
+    wine64
     winetricks
     wl-clipboard
-    wofi
+    xclip
     xdg-desktop-portal-wlr
     xfce.thunar # gui
+    xorg.xhost
     zip # why
   ];
   #security oooow
   security.polkit.enable = true;
   services.gnome.gnome-keyring.enable = true;
-
+  programs.fuse.userAllowOther = true;
   services.greetd.enable = true;
   services.greetd.settings = {
     default_session = {

@@ -48,6 +48,7 @@
         yaat = "home-manager switch --flake /home/vavakado/flakey";
         ".." = "cd ..";
       };
+      bashrcExtra = "stty stop ''; stty start '';";
       enable = true; # see note on other shells below
     };
     zoxide = {
@@ -59,25 +60,33 @@
       enableBashIntegration = true;
     };
 
-    #home.sessionVariables = { EDITOR = "nvim"; };
     home-manager.enable = true;
   };
+
+  nixpkgs.config.allowUnfree = true;
+
+  home.sessionVariables = { EDITOR = "nvim"; };
   home.sessionPath = [ "$HOME/.cargo/bin" ];
   home.packages = with pkgs; [
+    calibre
+    catimg
+    deadnix
+    go
+    gocryptfs
+    gopls
+    gotools
+    guile
+    icu
+    kakoune
+    marksman
+    mitschemeX11
     mpc-cli
-    ranger
-    mpd-sima
-    picard
     neovide
     neovim
-    mitschemeX11
-    guile
-    marksman
+    nodejs
+    picard
     prettierd
+    ranger
     statix
-    deadnix
-    catimg
-    nodejs_21
-    calibre
   ];
 }
