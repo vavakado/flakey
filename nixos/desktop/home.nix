@@ -7,7 +7,7 @@
   qt.enable = true;
   qt.style.name = "adwaita-dark";
   qt.style.package = pkgs.adwaita-qt;
-  qt.platformTheme = "gtk";
+  qt.platformTheme.name = "adwaita";
 
   gtk.enable = true;
   gtk.cursorTheme.package = pkgs.bibata-cursors;
@@ -70,12 +70,17 @@
   home.packages = with pkgs; [
     calibre
     catimg
+    gdu
     deadnix
     go
+    gimp
+    blender
     gocryptfs
     gopls
     gotools
     guile
+    nb
+    qownnotes
     icu
     kakoune
     marksman
@@ -87,6 +92,13 @@
     picard
     prettierd
     ranger
+    tig
+    pandoc
+    nmap
+    bat
+    w3m-nox
+    glow
+    dust
     statix
   ];
 }

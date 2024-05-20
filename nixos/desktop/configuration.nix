@@ -13,7 +13,8 @@ in {
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ./telegael.nix
-    ./gpu-passthrough.nix
+    # ./gpu-passthrough.nix
+    #./nix-alien.nix
   ];
   # enable flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -154,6 +155,7 @@ systemd.network.wait-online.enable = false;
     feh
     ffmpeg # av1 all the way
     filezilla
+    nix-index
     flameshot
     fractal
     gamemode
@@ -207,6 +209,7 @@ systemd.network.wait-online.enable = false;
     sccache # ccache but better
     slurp
     soundconverter
+    spicetify-cli
     spotify # premium((((
     sqlite
     sqlite-interactive
@@ -216,7 +219,6 @@ systemd.network.wait-online.enable = false;
     telegram-desktop
     tmux # best terminal multiplexer
     usbutils # lsusb
-    spicetify-cli
     vesktop # discord
     vkd3d-proton
     waybar
@@ -228,6 +230,7 @@ systemd.network.wait-online.enable = false;
     xclip
     xdg-desktop-portal-wlr
     xfce.thunar # gui
+    xivlauncher
     xorg.xhost
     zip # why
   ];
