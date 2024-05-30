@@ -41,8 +41,15 @@
     p7zip
     gcc
     ripgrep
-    xclip
+    wl-clipboard
     imv
+    neovide
+    nb
+    luajitPackages.luacheck
+ lua-language-server
+    stylua
+    eza
+    btop
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -81,5 +88,34 @@
   };
 
   # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
+  programs = {
+    direnv = {
+      enable = true;
+      enableBashIntegration = true; # see note on other shells below
+      nix-direnv.enable = true;
+    };
+
+    bash = {
+      shellAliases = {
+        v = "nvim";
+        ls = "eza --icons=auto --color=auto";
+        ll = "eza --icons=auto --color=auto -l";
+        yeet = "sudo nixos-rebuild switch --flake /home/vavakado/flakey";
+        yaat = "home-manager switch --flake /home/vavakado/flakey";
+        ".." = "cd ..";
+      };
+      bashrcExtra = "stty stop ''; stty start '';";
+      enable = true; # see note on other shells below
+    };
+    zoxide = {
+      enable = true;
+      enableBashIntegration = true;
+    };
+    starship = {
+      enable = true;
+      enableBashIntegration = true;
+    };
+
+    home-manager.enable = true;
+  };
 }
