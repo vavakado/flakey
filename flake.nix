@@ -5,10 +5,10 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    nix-citizen.url = "github:LovingMelody/nix-citizen";
+    nix-alien.url = "github:thiagokokada/nix-alien";
   };
 
-  outputs = { self, nixpkgs, home-manager, nix-citizen}@inputs:
+  outputs = { self, nixpkgs, home-manager, nix-alien}@inputs:
     let system = "x86_64-linux";
     in {
       nixosConfigurations = {

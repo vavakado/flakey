@@ -19,19 +19,7 @@
 
   home.stateVersion = "23.11"; # don't change it bro
 
-  services.mpd = {
-    enable = true;
-    musicDirectory = "/home/vavakado/Music";
-    extraConfig = ''
-      audio_output {
-              type            "pipewire"
-              name            "PipeWire Sound Server"
-      }
-    '';
-  };
-
   programs = {
-    ncmpcpp.enable = true;
 
     direnv = {
       enable = true;
@@ -74,19 +62,16 @@
     deadnix
     go
     gimp
-    blender
     gocryptfs
     gopls
     gotools
-    guile
     nb
     qownnotes
     icu
-    kakoune
     marksman
     mitschemeX11
-    mpc-cli
     neovide
+    keepassxc
     neovim
     nodejs
     picard

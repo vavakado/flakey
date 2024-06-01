@@ -9,6 +9,11 @@ let
     runtimeDependencies = prev.runtimeDependencies
       ++ [ pkgs.linuxKernel.packages.linux_zen.nvidia_x11 ];
   });
+  # blenderOverride = pkgs.blender.overrideAttrs (prev: {
+  #   runtimeDependencies = prev.runtimeDependencies
+  #     ++ [ pkgs.linuxKernel.packages.linux_zen.nvidia_x11 ];
+  #   cudaSupport = true;
+  # });
 in {
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -65,6 +70,7 @@ systemd.network.wait-online.enable = false;
     powerManagement.enable = false;
     nvidiaSettings = true;
     forceFullCompositionPipeline = true;
+    # package = config.boot.kernelPackages.nvidiaPackages.production;
   };
 
   programs.nix-ld.enable = true;
@@ -136,18 +142,16 @@ systemd.network.wait-online.enable = false;
   # PACKAGES
   environment.systemPackages = with pkgs; [
     #wofi #wayland
-    android-file-transfer
     anki
     unzip
     
-    blender # for godot
+    (blender.override { cudaSupport = true; }) # for godot
+    
     blueman # bluepoop
-    bottom
     btop # system monitor
     cinnamon.nemo-fileroller
     cinnamon.nemo-with-extensions
     clang
-    distrobox
     docker-compose
     dwarfs
     eza # ls for zoomers
@@ -157,7 +161,7 @@ systemd.network.wait-online.enable = false;
     filezilla
     nix-index
     flameshot
-    fractal
+    # fractal
     gamemode
     gamescope
     gdtoolkit
@@ -166,23 +170,21 @@ systemd.network.wait-online.enable = false;
     gnome.file-roller
     gnumake # bruh
     godot_4 # better than unity
-    graphviz # org-roam
+    # graphviz # org-roam
     greetd.tuigreet
-    grim
+    # grim
     gvfs # something
     gzip # zip
     handbrake
-    imagemagickBig # webp is so small
-    inputs.nix-citizen.packages.${system}.lug-helper
-    inputs.nix-citizen.packages.${system}.star-citizen-helper
-    jftui
-    jmtpfs
+    imagemagick # webp is so small
+    # inputs.nix-citizen.packages.${system}.lug-helper
+    # inputs.nix-citizen.packages.${system}.star-citizen-helper
+    inputs.nix-alien.packages.${system}.nix-alien
     kitty
     librewolf # the best browser
     localsend # airdrop but free as in freedom
-    logiops
     lutris
-    mako
+    # mako
     mangohud
     mate.mate-polkit
     mpv # best music player
@@ -206,37 +208,35 @@ systemd.network.wait-online.enable = false;
     rofi
     rust-analyzer
     rustup # r**t (i am not trans i swear)
-    sccache # ccache but better
-    slurp
+    ollama
+    # slurp
     soundconverter
-    spicetify-cli
     spotify # premium((((
     sqlite
     sqlite-interactive
     sunshineOverride
-    swww
+    # blenderOverride
+    # swww
     tealdeer # no man, i use tldr
     telegram-desktop
     tmux # best terminal multiplexer
     usbutils # lsusb
     vesktop # discord
     vkd3d-proton
-    waybar
+    # waybar
     wget # curl is worse
     wine
     wine64
     winetricks
-    wl-clipboard
+    # wl-clipboard
     xclip
-    xdg-desktop-portal-wlr
+    # xdg-desktop-portal-wlr
     xfce.thunar # gui
-    xivlauncher
     xorg.xhost
     zip # why
   ];
   #security oooow
   security.polkit.enable = true;
-  services.gnome.gnome-keyring.enable = true;
   programs.fuse.userAllowOther = true;
   services.greetd.enable = true;
   services.greetd.settings = {
@@ -247,6 +247,10 @@ systemd.network.wait-online.enable = false;
   };
      services.xserver.libinput.mouse.accelSpeed = "0.0";
 services.xserver.libinput.mouse.accelProfile = "flat";
+services.ollama = {
+  enable = true;
+  acceleration = "cuda";
+};
   # i use the best mouse ever
   hardware.logitech.wireless = {
     enable = true;
@@ -312,6 +316,7 @@ services.xserver.libinput.mouse.accelProfile = "flat";
 
   # Enable the sshd
   services.openssh.enable = true;
+programs.ssh.startAgent = true;
 
   system.stateVersion = "23.11"; # DO NOT CHANGE
 
