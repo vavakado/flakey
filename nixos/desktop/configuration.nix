@@ -9,18 +9,13 @@ let
     runtimeDependencies = prev.runtimeDependencies
       ++ [ pkgs.linuxKernel.packages.linux_zen.nvidia_x11 ];
   });
-  # blenderOverride = pkgs.blender.overrideAttrs (prev: {
-  #   runtimeDependencies = prev.runtimeDependencies
-  #     ++ [ pkgs.linuxKernel.packages.linux_zen.nvidia_x11 ];
-  #   cudaSupport = true;
-  # });
 in {
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ./telegael.nix
-    # ./gpu-passthrough.nix
-    #./nix-alien.nix
+    ./gpu-passthrough.nix
   ];
+
   # enable flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   services.gvfs.enable = true;
@@ -31,10 +26,10 @@ in {
     efiSupport = true;
     useOSProber = true;
   };
-services.xserver.windowManager.herbstluftwm.enable = true;
-services.xserver.displayManager.startx.enable = true;
-services.xserver.enable = true;
-systemd.network.wait-online.enable = false;
+  # services.xserver.windowManager.herbstluftwm.enable = true;
+  # services.xserver.displayManager.startx.enable = true;
+  # services.xserver.enable = true;
+  systemd.network.wait-online.enable = false;
   boot.supportedFilesystems = [ "zfs" ];
   networking.hostId = "b93f3baf";
   services.zfs.autoScrub.enable = true;
@@ -70,7 +65,7 @@ systemd.network.wait-online.enable = false;
     powerManagement.enable = false;
     nvidiaSettings = true;
     forceFullCompositionPipeline = true;
-    # package = config.boot.kernelPackages.nvidiaPackages.production;
+    package = config.boot.kernelPackages.nvidiaPackages.beta;
   };
 
   programs.nix-ld.enable = true;
@@ -81,9 +76,10 @@ systemd.network.wait-online.enable = false;
   time.hardwareClockInLocalTime = true;
 
   # no more x11
-  programs.hyprland.enable = false; #wait for may 15
-  #environment.sessionVariables.NIXOS_OZONE_WL = "1";
-  #environment.variables.WLR_NO_HARDWARE_CURSORS = "1";
+  programs.hyprland.enable = true; # wait for may 15
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+  environment.variables.WLR_NO_HARDWARE_CURSORS = "1";
+
   # Enable pipewire (pisswire)
   security.rtkit.enable = true;
   services.pipewire = {
@@ -141,12 +137,21 @@ systemd.network.wait-online.enable = false;
 
   # PACKAGES
   environment.systemPackages = with pkgs; [
-    #wofi #wayland
+    wofi #wayland
     anki
     unzip
-    
+
     (blender.override { cudaSupport = true; }) # for godot
-    
+
+    grim
+    # inputs.nix-citizen.packages.${system}.lug-helper
+    # inputs.nix-citizen.packages.${system}.star-citizen-helper
+    mako
+    slurp
+    swww
+    waybar
+    wl-clipboard
+    # xdg-desktop-portal-wlr
     blueman # bluepoop
     btop # system monitor
     cinnamon.nemo-fileroller
@@ -156,83 +161,71 @@ systemd.network.wait-online.enable = false;
     dwarfs
     eza # ls for zoomers
     fd # find for zoomers
-    feh
+    # feh
     ffmpeg # av1 all the way
     filezilla
-    nix-index
-    flameshot
-    # fractal
+    # flameshot
     gamemode
     gamescope
-    gdtoolkit
     gh # someday i will host my own gitlab instance
     git # the best VCS
     gnome.file-roller
     gnumake # bruh
     godot_4 # better than unity
-    # graphviz # org-roam
     greetd.tuigreet
-    # grim
     gvfs # something
     gzip # zip
-    handbrake
+    # handbrake
     imagemagick # webp is so small
-    # inputs.nix-citizen.packages.${system}.lug-helper
-    # inputs.nix-citizen.packages.${system}.star-citizen-helper
     inputs.nix-alien.packages.${system}.nix-alien
     kitty
     librewolf # the best browser
     localsend # airdrop but free as in freedom
     lutris
-    # mako
     mangohud
     mate.mate-polkit
     mpv # best music player
-    newsflash
+    # newsflash
     nil # nix lsp
+    nix-index
     nixfmt # nix fmt
     nomacs
+    imv
     ntfs3g # i still use windows(
     obs-studio
+    ollama
     p7zip # 7z
     pavucontrol # audio
-    picom
+    # picom
     pkg-config
     polkit
-    polybarFull
+    # polybarFull
     protonup-qt
     python3 # hate it
     qbittorrent # best torrent client
     rclone # i still use drop box
     ripgrep # zoomer grep
-    rofi
+    # rofi
     rust-analyzer
     rustup # r**t (i am not trans i swear)
-    ollama
-    # slurp
     soundconverter
     spotify # premium((((
     sqlite
     sqlite-interactive
     sunshineOverride
-    # blenderOverride
-    # swww
     tealdeer # no man, i use tldr
     telegram-desktop
     tmux # best terminal multiplexer
     usbutils # lsusb
     vesktop # discord
     vkd3d-proton
-    # waybar
     wget # curl is worse
     wine
     wine64
     winetricks
-    # wl-clipboard
-    xclip
-    # xdg-desktop-portal-wlr
+    # xclip
     xfce.thunar # gui
-    xorg.xhost
+    # xorg.xhost
     zip # why
   ];
   #security oooow
@@ -245,12 +238,12 @@ systemd.network.wait-online.enable = false;
       user = "vavakado";
     };
   };
-     services.xserver.libinput.mouse.accelSpeed = "0.0";
-services.xserver.libinput.mouse.accelProfile = "flat";
-services.ollama = {
-  enable = true;
-  acceleration = "cuda";
-};
+  services.xserver.libinput.mouse.accelSpeed = "0.0";
+  services.xserver.libinput.mouse.accelProfile = "flat";
+  services.ollama = {
+    enable = true;
+    acceleration = "cuda";
+  };
   # i use the best mouse ever
   hardware.logitech.wireless = {
     enable = true;
@@ -316,7 +309,7 @@ services.ollama = {
 
   # Enable the sshd
   services.openssh.enable = true;
-programs.ssh.startAgent = true;
+  programs.ssh.startAgent = true;
 
   system.stateVersion = "23.11"; # DO NOT CHANGE
 

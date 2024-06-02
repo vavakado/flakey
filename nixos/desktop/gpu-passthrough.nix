@@ -188,7 +188,6 @@
       mode = "0755";
     };
 
-    "libvirt/vgabios/patched.rom".source =
-      /home/vavakado/Documents/pached.rom;
+    "libvirt/vgabios/patched.rom".source = /home/vavakado/Documents/pached.rom;
   };
 }
