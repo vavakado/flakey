@@ -2,14 +2,7 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, inputs, ... }:
-
-let
-  sunshineOverride = pkgs.sunshine.overrideAttrs (prev: {
-    runtimeDependencies = prev.runtimeDependencies
-      ++ [ pkgs.linuxKernel.packages.linux_zen.nvidia_x11 ];
-  });
-in {
+{ config, lib, pkgs, inputs, ... }: {
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ./telegael.nix
@@ -137,7 +130,7 @@ in {
 
   # PACKAGES
   environment.systemPackages = with pkgs; [
-    wofi #wayland
+    wofi # wayland
     anki
     unzip
 
@@ -212,7 +205,7 @@ in {
     spotify # premium((((
     sqlite
     sqlite-interactive
-    sunshineOverride
+    (sunshine.override { cudaSupport = true; })
     tealdeer # no man, i use tldr
     telegram-desktop
     tmux # best terminal multiplexer
