@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, lib, ... }: {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "vavakado";
@@ -27,6 +27,24 @@
       nix-direnv.enable = true;
     };
 
+    neovim = {
+      enable = true;
+      extraWrapperArgs = [
+        "--suffix"
+        "LIBRARY_PATH"
+        ":"
+        "${lib.makeLibraryPath [ pkgs.stdenv.cc.cc pkgs.zlib ]}"
+        "--suffix"
+        "PKG_CONFIG_PATH"
+        ":"
+        "${lib.makeSearchPathOutput "dev" "lib/pkgconfig" [
+          pkgs.stdenv.cc.cc
+          pkgs.zlib
+        ]}"
+      ];
+      vimdiffAlias = true;
+    };
+
     bash = {
       shellAliases = {
         v = "nvim";
@@ -35,6 +53,9 @@
         yeet = "sudo nixos-rebuild switch --flake /home/vavakado/flakey";
         yaat = "home-manager switch --flake /home/vavakado/flakey";
         ".." = "cd ..";
+        gs = "git status";
+        gc = "git commit -a";
+        g = "git";
       };
       bashrcExtra = "stty stop ''; stty start '';";
       enable = true; # see note on other shells below
@@ -57,7 +78,6 @@
   home.sessionPath = [ "$HOME/.cargo/bin" ];
   home.packages = with pkgs; [
     calibre
-    catimg
     gdu
     deadnix
     go
@@ -72,7 +92,6 @@
     mitschemeX11
     neovide
     keepassxc
-    neovim
     nodejs
     picard
     prettierd
@@ -85,5 +104,6 @@
     glow
     dust
     statix
+    viu
   ];
 }

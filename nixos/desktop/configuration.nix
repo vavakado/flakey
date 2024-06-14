@@ -130,21 +130,24 @@
 
   # PACKAGES
   environment.systemPackages = with pkgs; [
-    wofi # wayland
-    anki
-    unzip
 
-    (blender.override { cudaSupport = true; }) # for godot
-
-    grim
+    prismlauncher
+    # feh
+    # flameshot
+    # handbrake
     # inputs.nix-citizen.packages.${system}.lug-helper
     # inputs.nix-citizen.packages.${system}.star-citizen-helper
-    mako
-    slurp
-    swww
-    waybar
-    wl-clipboard
+    # newsflash
+    # picom
+    # polybarFull
+    # rofi
+    # xclip
     # xdg-desktop-portal-wlr
+    # xorg.xhost
+    htop
+    (blender.override { cudaSupport = true; }) # for godot
+    (sunshine.override { cudaSupport = true; })
+    anki
     blueman # bluepoop
     btop # system monitor
     cinnamon.nemo-fileroller
@@ -154,80 +157,91 @@
     dwarfs
     eza # ls for zoomers
     fd # find for zoomers
-    # feh
     ffmpeg # av1 all the way
     filezilla
-    # flameshot
     gamemode
     gamescope
     gh # someday i will host my own gitlab instance
     git # the best VCS
+    git-extras
     gnome.file-roller
     gnumake # bruh
     godot_4 # better than unity
     greetd.tuigreet
+    grim
     gvfs # something
     gzip # zip
-    # handbrake
     imagemagick # webp is so small
+    imv
     inputs.nix-alien.packages.${system}.nix-alien
     kitty
     librewolf # the best browser
     localsend # airdrop but free as in freedom
     lutris
+    mako
     mangohud
     mate.mate-polkit
     mpv # best music player
-    # newsflash
     nil # nix lsp
     nix-index
     nixfmt # nix fmt
     nomacs
-    imv
     ntfs3g # i still use windows(
     obs-studio
     ollama
     p7zip # 7z
     pavucontrol # audio
-    # picom
     pkg-config
     polkit
-    # polybarFull
     protonup-qt
     python3 # hate it
     qbittorrent # best torrent client
     rclone # i still use drop box
     ripgrep # zoomer grep
-    # rofi
     rust-analyzer
     rustup # r**t (i am not trans i swear)
+    slurp
     soundconverter
     spotify # premium((((
-    sqlite
-    sqlite-interactive
-    (sunshine.override { cudaSupport = true; })
+    swww
     tealdeer # no man, i use tldr
     telegram-desktop
     tmux # best terminal multiplexer
+    unzip
     usbutils # lsusb
     vesktop # discord
     vkd3d-proton
+    niri
+    waybar
     wget # curl is worse
     wine
     wine64
     winetricks
-    # xclip
+    wl-clipboard
+    wofi # wayland
     xfce.thunar # gui
-    # xorg.xhost
     zip # why
+    reaper
+    lmms
+    jftui
+    jellyfin-media-player
   ];
+  # disable dualshock touchpad
+  services.udev.extraRules = ''
+# Disable DS4 touchpad acting as mouse
+# USB
+ATTRS{name}=="Sony Interactive Entertainment Wireless Controller Touchpad", ENV{LIBINPUT_IGNORE_DEVICE}="1"
+# Bluetooth
+ATTRS{name}=="Wireless Controller Touchpad", ENV{LIBINPUT_IGNORE_DEVICE}="1"
+  '';
+
   #security oooow
   security.polkit.enable = true;
   programs.fuse.userAllowOther = true;
   services.greetd.enable = true;
   services.greetd.settings = {
     default_session = {
-      command = "${pkgs.greetd.tuigreet}/bin/tuigreet --cmd startx";
+      command = "${pkgs.greetd.tuigreet}/bin/tuigreet -g \"Hello Vladimir\" -r --remember-session";
       user = "vavakado";
     };
   };
