@@ -20,7 +20,6 @@
   home.stateVersion = "23.11"; # don't change it bro
 
   programs = {
-
     direnv = {
       enable = true;
       enableBashIntegration = true; # see note on other shells below
@@ -50,7 +49,7 @@
         v = "nvim";
         ls = "eza --icons=auto --color=auto";
         ll = "eza --icons=auto --color=auto -l";
-        yeet = "sudo nixos-rebuild switch --flake /home/vavakado/flakey";
+        yeet = "~/rebuild";
         yaat = "home-manager switch --flake /home/vavakado/flakey";
         ".." = "cd ..";
         gs = "git status";

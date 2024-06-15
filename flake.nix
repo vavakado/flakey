@@ -8,7 +8,7 @@
     nix-alien.url = "github:thiagokokada/nix-alien";
   };
 
-  outputs = { self, nixpkgs, home-manager, nix-alien}@inputs:
+  outputs = { self, nixpkgs, home-manager, nix-alien, }@inputs:
     let system = "x86_64-linux";
     in {
       nixosConfigurations = {
@@ -35,8 +35,7 @@
       };
       homeConfigurations.vavakado = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.${system};
-        modules =
-          [ ./nixos/desktop/home.nix ];
+        modules = [ ./nixos/desktop/home.nix ];
       };
     };
 }

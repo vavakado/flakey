@@ -1,9 +1,9 @@
 # Edit this configuration file to define what should be installed on
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
-
 { config, lib, pkgs, inputs, ... }: {
-  imports = [ # Include the results of the hardware scan.
+  imports = [
+    # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ./telegael.nix
     ./gpu-passthrough.nix
@@ -130,7 +130,6 @@
 
   # PACKAGES
   environment.systemPackages = with pkgs; [
-
     prismlauncher
     # feh
     # flameshot
@@ -211,6 +210,7 @@
     usbutils # lsusb
     vesktop # discord
     vkd3d-proton
+    libnotify
     niri
     waybar
     wget # curl is worse
@@ -228,11 +228,11 @@
   ];
   # disable dualshock touchpad
   services.udev.extraRules = ''
-# Disable DS4 touchpad acting as mouse
-# USB
-ATTRS{name}=="Sony Interactive Entertainment Wireless Controller Touchpad", ENV{LIBINPUT_IGNORE_DEVICE}="1"
-# Bluetooth
-ATTRS{name}=="Wireless Controller Touchpad", ENV{LIBINPUT_IGNORE_DEVICE}="1"
+    # Disable DS4 touchpad acting as mouse
+    # USB
+    ATTRS{name}=="Sony Interactive Entertainment Wireless Controller Touchpad", ENV{LIBINPUT_IGNORE_DEVICE}="1"
+    # Bluetooth
+    ATTRS{name}=="Wireless Controller Touchpad", ENV{LIBINPUT_IGNORE_DEVICE}="1"
   '';
 
   #security oooow
@@ -241,7 +241,8 @@ ATTRS{name}=="Wireless Controller Touchpad", ENV{LIBINPUT_IGNORE_DEVICE}="1"
   services.greetd.enable = true;
   services.greetd.settings = {
     default_session = {
-      command = "${pkgs.greetd.tuigreet}/bin/tuigreet -g \"Hello Vladimir\" -r --remember-session";
+      command = ''
+        ${pkgs.greetd.tuigreet}/bin/tuigreet -g "Hello Vladimir" -r --remember-session'';
       user = "vavakado";
     };
   };
@@ -298,8 +299,6 @@ ATTRS{name}=="Wireless Controller Touchpad", ENV{LIBINPUT_IGNORE_DEVICE}="1"
     noto-fonts
     noto-fonts-cjk
     noto-fonts-emoji
-    twitter-color-emoji
-    twemoji-color-font
     emojione
     (nerdfonts.override {
       fonts = [ "CascadiaCode" "VictorMono" "Iosevka" "JetBrainsMono" ];
@@ -319,5 +318,4 @@ ATTRS{name}=="Wireless Controller Touchpad", ENV{LIBINPUT_IGNORE_DEVICE}="1"
   programs.ssh.startAgent = true;
 
   system.stateVersion = "23.11"; # DO NOT CHANGE
-
 }

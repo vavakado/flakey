@@ -1,6 +1,4 @@
-{ config, pkgs, ... }:
-
-{
+{ config, pkgs, ... }: {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "vavakado";
@@ -46,7 +44,7 @@
     neovide
     nb
     luajitPackages.luacheck
- lua-language-server
+    lua-language-server
     stylua
     eza
     btop
