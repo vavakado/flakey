@@ -30,6 +30,11 @@
     flake = "/home/vavakado/flakey";
   };
 
+  services.ollama = {
+    enable = true;
+    acceleration = "cuda";
+  };
+
   hardware.opengl = {
     enable = true;
     driSupport = true;
@@ -154,14 +159,14 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    #  wget
-    neovim
-    firefox
-    bemenu
-    foot
-    git
-    swaybg
+  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+  #  wget
+     neovim
+     firefox
+     bemenu
+     foot
+     git
+     niri
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -169,8 +174,8 @@
   # programs.mtr.enable = true;
   programs.gnupg.agent = {
     enable = true;
-    enableSSHSupport = true;
   };
+programs.ssh.startAgent = true;
 
   # List services that you want to enable:
 

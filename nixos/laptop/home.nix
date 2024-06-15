@@ -32,7 +32,6 @@
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
-    ripgrep
     git
     gnumake
     unzip
@@ -48,6 +47,11 @@
     stylua
     eza
     btop
+    gh
+    keepassxc
+    wallust
+    swww
+    flavours
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
