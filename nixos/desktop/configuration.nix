@@ -9,6 +9,22 @@
     ./gpu-passthrough.nix
   ];
 
+  # nixpkgs.overlays = [
+  #   (final: prev: {
+  #     hyprland = prev.hyprland.overrideAttrs (oldAttrs: rec {
+  #       version = "0.41.1";
+  #       src = prev.fetchFromGitHub {
+  #         owner = "hyprwm";
+  #         repo = "Hyprland";
+  #         rev = "9e781040d9067c2711ec2e9f5b47b76ef70762b3";
+  #         hash = "sha256-pYWlT7CB8F5h8Cuydsq4pKu7dKRYb1BVTq+HJfmLsoo=";
+  #       };
+  #       DATE = "2024-06-13";
+  #       HASH = "9e781040d9067c2711ec2e9f5b47b76ef70762b3";
+  #     });
+  #  })
+  # ];
+
   # enable flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   services.gvfs.enable = true;
@@ -70,6 +86,7 @@
 
   # no more x11
   programs.hyprland.enable = true; # wait for may 15
+  programs.hyprland.package = inputs.hyprland.packages.${pkgs.system}.hyprland;
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
   environment.variables.WLR_NO_HARDWARE_CURSORS = "1";
 

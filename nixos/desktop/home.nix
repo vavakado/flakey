@@ -85,10 +85,10 @@
     gopls
     gotools
     nb
-    qownnotes
+    # qownnotes
     icu
     marksman
-    mitschemeX11
+    # mitschemeX11
     neovide
     keepassxc
     nodejs
