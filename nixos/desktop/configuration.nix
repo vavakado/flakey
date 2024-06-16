@@ -141,7 +141,7 @@
     # polybarFull
     # rofi
     # xclip
-    # xdg-desktop-portal-wlr
+    xdg-desktop-portal-wlr
     # xorg.xhost
     htop
     (blender.override { cudaSupport = true; }) # for godot
