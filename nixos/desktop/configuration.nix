@@ -167,6 +167,7 @@
     blueman # bluepoop
     btop # system monitor
     cinnamon.nemo-fileroller
+    jellyfin-mpv-shim
     cinnamon.nemo-with-extensions
     clang
     docker-compose
