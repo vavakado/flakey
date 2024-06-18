@@ -15,7 +15,10 @@
       nixosConfigurations = {
         nixuwu = nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit self system; inherit inputs; };
+          specialArgs = {
+            inherit self system;
+            inherit inputs;
+          };
 
           modules = [
             ./nixos/laptop/configuration.nix

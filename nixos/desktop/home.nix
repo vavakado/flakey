@@ -92,7 +92,6 @@
     neovide
     keepassxc
     nodejs
-    picard
     prettierd
     ranger
     tig
