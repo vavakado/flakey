@@ -168,8 +168,6 @@
     btop # system monitor
     cinnamon.nemo-fileroller
     jellyfin-mpv-shim
-    zulu
-    zulu8
     cinnamon.nemo-with-extensions
     clang
     docker-compose
