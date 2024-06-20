@@ -320,7 +320,8 @@
     noto-fonts-emoji
     emojione
     (nerdfonts.override {
-      fonts = [ "CascadiaCode" "VictorMono" "Iosevka" "JetBrainsMono" ];
+      fonts =
+        [ "CascadiaCode" "EnvyCodeR" "VictorMono" "Iosevka" "JetBrainsMono" ];
     })
   ];
 

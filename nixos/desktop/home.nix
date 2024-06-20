@@ -103,10 +103,5 @@
     dust
     statix
     viu
-
-    mono
-    csharp-ls
-    csharpier
-    netcoredbg
   ];
 }
