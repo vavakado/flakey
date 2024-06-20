@@ -197,6 +197,7 @@
     lutris
     mako
     mangohud
+    unityhub
     mate.mate-polkit
     mpv # best music player
     nil # nix lsp
