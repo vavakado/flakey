@@ -34,12 +34,12 @@
           inherit system;
           specialArgs = { inherit inputs; };
 
-          modules = [ ./nixos/desktop/configuration.nix ];
+          modules = [ ./nixos/new-desktop/configuration.nix ];
         };
       };
       homeConfigurations.vavakado = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.${system};
-        modules = [ ./nixos/desktop/home.nix ];
+        modules = [ ./nixos/new-desktop/home.nix ];
       };
     };
 }
