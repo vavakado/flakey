@@ -68,44 +68,56 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  # home.sessionVariables = { EDITOR = "nvim"; };
+  home.sessionVariables = { EDITOR = "nvim"; };
   # home.sessionPath = [ "$HOME/.cargo/bin" ];
   home.packages = with pkgs; [
-    vesktop
-    pavucontrol
-    alsa-utils
-    btop
-    anki
-    neovide
-    nixfmt
-    wl-clipboard
-    telegram-desktop
-    calibre
-    gdu
-    # deadnix
-    go
-    gimp
-    gocryptfs
-    gopls
-    gotools
-    nb
-    # # qownnotes
-    # marksman
+    grim
+    imv
+    mpv
+    patchelf
+    slurp
+    stylua
+    udiskie
+    unzip
     # # mitschemeX11
-    keepassxc
-    ripgrep
+    # # qownnotes
+    # deadnix
+    # marksman
+    # nmap
     # nodejs
     # prettierd
-    ranger
-    tig
-    pandoc
-    # nmap
-    bat
     # w3m-nox
-    glow
+    #calibre
+    #gimp
+    #gocryptfs
+    alsa-utils
+    anki
+    bat
+    btop
     dust
-    statix
-    viu
     fd
+    gdu
+    glow
+    go
+    gopls
+    gotools
+    keepassxc
+    nb
+    neovide
+    nixfmt
+    pandoc
+    pavucontrol
+    ranger
+    ripgrep
+    gnumake
+    spotify # premium((((
+    statix
+    tealdeer # no man, i use tldr
+    telegram-desktop
+    tig
+    vesktop
+    csharp-ls
+    viu
+    wl-clipboard
   ];
 }

@@ -130,17 +130,22 @@
     cinnamon.nemo-fileroller
     # jellyfin-mpv-shim
     cinnamon.nemo-with-extensions
-    gcc
-    
+    # gcc
+    clang
+    astyle
+
+    # clang-tools
+
     docker-compose
     dwarfs
+    python3
     # ffmpeg # av1 all the way
     # filezilla
     # gamemode
     # gamescope
     # gnome.file-roller
     # gnumake # bruh
-    # godot_4 # better than unity
+    godot_4 # better than unity
     # greetd.tuigreet
     # grim
     # gvfs # something
@@ -152,9 +157,9 @@
     # librewolf # the best browser
     # localsend # airdrop but free as in freedom
     # lutris
-    # mako
+    mako
     # mangohud
-    # unityhub
+    unityhub
     # mate.mate-polkit
     # mpv # best music player
     # nil # nix lsp
@@ -175,18 +180,15 @@
     # ripgrep # zoomer grep
     # rust-analyzer
     # rustup # r**t (i am not trans i swear)
-    # slurp
     # soundconverter
-    # spotify # premium((((
     # swww
-    # tealdeer # no man, i use tldr
     # telegram-desktop
     tmux # best terminal multiplexer
     # unzip
     # usbutils # lsusb
     # vesktop # discord
     # vkd3d-proton
-    # libnotify
+    libnotify
     # niri
     # waybar
     wget # curl is worse
@@ -195,6 +197,10 @@
     # winetricks
     # xfce.thunar # gui
     # zip # why
+    # dotnet
+    dotnet-sdk_8
+    dotnet-runtime_8
+    mono
     # reaper
     # lmms
     # jftui
