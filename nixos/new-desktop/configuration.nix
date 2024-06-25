@@ -126,6 +126,7 @@
     # gcc
     # gnome.file-roller
     # gnumake # bruh
+	lftp
     # greetd.tuigreet
     # grim
     # gvfs # something
