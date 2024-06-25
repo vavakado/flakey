@@ -104,15 +104,6 @@
 
   # PACKAGES
   environment.systemPackages = with pkgs; [
-    vim
-    git
-    gh
-    firefox
-    alacritty
-    swaybg
-    wofi
-    waybar
-    # prismlauncher
     # # feh
     # # flameshot
     # # handbrake
@@ -123,29 +114,18 @@
     # # polybarFull
     # # rofi
     # # xclip
-    (blender.override { cudaSupport = true; }) # for godot
     # (sunshine.override { cudaSupport = true; })
-    # blueman # bluepoop
+	blueberry
     # btop # system monitor
-    cinnamon.nemo-fileroller
-    # jellyfin-mpv-shim
-    cinnamon.nemo-with-extensions
-    # gcc
-    clang
-    astyle
-
     # clang-tools
-
-    docker-compose
-    dwarfs
-    python3
-    # ffmpeg # av1 all the way
+    # dotnet
+    ffmpeg # av1 all the way
     # filezilla
     # gamemode
     # gamescope
+    # gcc
     # gnome.file-roller
     # gnumake # bruh
-    godot_4 # better than unity
     # greetd.tuigreet
     # grim
     # gvfs # something
@@ -153,58 +133,76 @@
     # imagemagick # webp is so small
     # imv
     # inputs.nix-alien.packages.${system}.nix-alien
+    # jellyfin-media-player
+    # jellyfin-mpv-shim
+    # jftui
     # kitty
     # librewolf # the best browser
+    # lmms
     # localsend # airdrop but free as in freedom
-    # lutris
-    mako
+    lutris
     # mangohud
-    unityhub
     # mate.mate-polkit
     # mpv # best music player
     # nil # nix lsp
-    # nix-index
+    # niri
+    nix-index
     # nixfmt # nix fmt
     # nomacs
     # ntfs3g # i still use windows(
     # obs-studio
-    ollama
     # p7zip # 7z
     # pavucontrol # audio
     # pkg-config
     # polkit
-    # protonup-qt
+    # prismlauncher
+    protonup-qt
     # python3 # hate it
     # qbittorrent # best torrent client
     # rclone # i still use drop box
+    # reaper
     # ripgrep # zoomer grep
     # rust-analyzer
     # rustup # r**t (i am not trans i swear)
     # soundconverter
     # swww
     # telegram-desktop
-    tmux # best terminal multiplexer
     # unzip
     # usbutils # lsusb
     # vesktop # discord
     # vkd3d-proton
-    libnotify
-    # niri
     # waybar
-    wget # curl is worse
     # wine
     # wine64
     # winetricks
     # xfce.thunar # gui
     # zip # why
-    # dotnet
-    dotnet-sdk_8
+    (blender.override { cudaSupport = true; }) # for godot
+    alacritty
+    astyle
+    cinnamon.nemo-fileroller
+    cinnamon.nemo-with-extensions
+    clang
+    docker-compose
     dotnet-runtime_8
+    dotnet-sdk_8
+    dwarfs
+    firefox
+    gh
+    git
+    godot_4 # better than unity
+    libnotify
+    mako
     mono
-    # reaper
-    # lmms
-    # jftui
-    # jellyfin-media-player
+    ollama
+    python3
+    swaybg
+    tmux # best terminal multiplexer
+    unityhub
+    vim
+    waybar
+    wget # curl is worse
+    wofi
   ];
 
   programs.steam.enable = true;

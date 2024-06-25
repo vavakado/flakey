@@ -78,7 +78,8 @@
     slurp
     stylua
     udiskie
-    unzip
+	nomacs
+	unzip
     # # mitschemeX11
     # # qownnotes
     # deadnix
