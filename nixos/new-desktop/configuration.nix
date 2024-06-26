@@ -7,17 +7,15 @@
   # enable flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+  boot.loader.efi.canTouchEfiVariables = true;
   # GRUB stuff
   boot.loader.grub = {
     enable = true;
     devices = [ "nodev" ];
-    efiInstallAsRemovable = true;
     efiSupport = true;
     useOSProber = true;
   };
-  boot.supportedFilesystems = [ "zfs" ];
-  networking.hostId = "b93f3baf";
-  services.zfs.autoScrub.enable = true;
+
   networking.hostName = "nixpc"; # Define your hostname.
 
   # wifi has never been so easy
@@ -115,7 +113,7 @@
     # # rofi
     # # xclip
     # (sunshine.override { cudaSupport = true; })
-	blueberry
+    blueberry
     # btop # system monitor
     # clang-tools
     # dotnet
@@ -126,7 +124,7 @@
     # gcc
     # gnome.file-roller
     # gnumake # bruh
-	lftp
+    lftp
     # greetd.tuigreet
     # grim
     # gvfs # something
@@ -276,6 +274,7 @@
       fonts = [
         "CascadiaCode"
         "DaddyTimeMono"
+        "SourceCodePro"
         "VictorMono"
         "Iosevka"
         "Hasklig"

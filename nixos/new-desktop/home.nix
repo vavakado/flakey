@@ -78,8 +78,10 @@
     slurp
     stylua
     udiskie
-	nomacs
-	unzip
+    nomacs
+    lua51Packages.lua
+    lua51Packages.luarocks
+    unzip
     # # mitschemeX11
     # # qownnotes
     # deadnix
@@ -120,5 +122,10 @@
     csharp-ls
     viu
     wl-clipboard
+
+    emacs # i give another try to this thing
+    ack
+    silver-searcher
+    platinum-searcher
   ];
 }

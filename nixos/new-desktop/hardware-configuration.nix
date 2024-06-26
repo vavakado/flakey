@@ -4,58 +4,49 @@
 { config, lib, pkgs, modulesPath, ... }:
 
 {
-  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
+  imports =
+    [ (modulesPath + "/installer/scan/not-detected.nix")
+    ];
 
-  boot.initrd.availableKernelModules =
-    [ "vmd" "xhci_pci" "ahci" "nvme" "usbhid" "sd_mod" ];
+  boot.initrd.availableKernelModules = [ "vmd" "xhci_pci" "ahci" "nvme" "usbhid" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
-  fileSystems."/" = {
-    device = "NIXROOT/root";
-    fsType = "zfs";
-  };
+  fileSystems."/" =
+    { device = "/dev/disk/by-uuid/5a39d467-ac3f-48b4-9440-dc62387d9c97";
+      fsType = "xfs";
+    };
 
-  fileSystems."/mnt/games" = {
-    device = "NIXROOT/games";
-    fsType = "zfs";
-  };
+  fileSystems."/mnt/steamlib" =
+    { device = "/dev/disk/by-uuid/a607cf11-85e9-4d2a-b9b0-ccc1fa23e9a5";
+      fsType = "ext4";
+    };
 
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/1885-8EDF";
-    fsType = "vfat";
-    options = [ "fmask=0022" "dmask=0022" ];
-  };
+  fileSystems."/home" =
+    { device = "/dev/disk/by-uuid/9700630a-397c-4eeb-aade-f231b2e199dc";
+      fsType = "ext4";
+    };
 
-  fileSystems."/mnt/steamlib" = {
-    device = "/dev/disk/by-uuid/a607cf11-85e9-4d2a-b9b0-ccc1fa23e9a5";
-    fsType = "ext4";
-  };
-
-  fileSystems."/home" = {
-    device = "/dev/disk/by-uuid/9700630a-397c-4eeb-aade-f231b2e199dc";
-    fsType = "ext4";
-  };
+  fileSystems."/boot" =
+    { device = "/dev/disk/by-uuid/2B91-FF89";
+      fsType = "vfat";
+      options = [ "fmask=0022" "dmask=0022" ];
+    };
 
   swapDevices =
-    [{ device = "/dev/disk/by-uuid/1dcc5672-b28b-445b-8a42-8bcb17d07868"; }];
+    [ { device = "/dev/disk/by-uuid/6b49567b-b643-4b74-8a6e-1742b12fcb49"; }
+    ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
   # still possible to use this option, but it's recommended to use it in conjunction
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
-  # networking.interfaces.br-6a3f5f0a48aa.useDHCP = lib.mkDefault true;
+  # networking.interfaces.br-eaefbd5c7fb9.useDHCP = lib.mkDefault true;
   # networking.interfaces.docker0.useDHCP = lib.mkDefault true;
   # networking.interfaces.enp5s0.useDHCP = lib.mkDefault true;
-  # networking.interfaces.tailscale0.useDHCP = lib.mkDefault true;
-  # networking.interfaces.veth992ed6b.useDHCP = lib.mkDefault true;
-  # networking.interfaces.virbr0.useDHCP = lib.mkDefault true;
-  # networking.interfaces.ztcfwx4tq5.useDHCP = lib.mkDefault true;
-  # networking.interfaces.zth6rhgjot.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  hardware.cpu.intel.updateMicrocode =
-    lib.mkDefault config.hardware.enableRedistributableFirmware;
+  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }
