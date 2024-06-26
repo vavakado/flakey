@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }: {
+{ pkgs, lib, inputs, ... }: {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "vavakado";
@@ -122,10 +122,5 @@
     csharp-ls
     viu
     wl-clipboard
-
-    emacs # i give another try to this thing
-    ack
-    silver-searcher
-    platinum-searcher
   ];
 }

@@ -26,6 +26,7 @@
 
   # i am not a copyleft snob
   nixpkgs.config.allowUnfree = true;
+  services.locate.enable = true;
 
   # nvidia
   hardware.opengl = {
@@ -154,7 +155,7 @@
     # pavucontrol # audio
     # pkg-config
     # polkit
-    # prismlauncher
+    prismlauncher
     protonup-qt
     # python3 # hate it
     # qbittorrent # best torrent client
@@ -271,15 +272,8 @@
     noto-fonts-emoji
     emojione
     (nerdfonts.override {
-      fonts = [
-        "CascadiaCode"
-        "DaddyTimeMono"
-        "SourceCodePro"
-        "VictorMono"
-        "Iosevka"
-        "Hasklig"
-        "JetBrainsMono"
-      ];
+      fonts =
+        [ "CascadiaCode" "VictorMono" "Iosevka" "Hasklig" "JetBrainsMono" ];
     })
   ];
 
