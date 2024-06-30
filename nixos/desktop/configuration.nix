@@ -1,39 +1,20 @@
 # Edit this configuration file to define what should be installed on
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
-{ config, lib, pkgs, inputs, ... }: {
-  imports = [
-    # Include the results of the hardware scan.
-    ./hardware-configuration.nix
-    ./telegael.nix
-    ./gpu-passthrough.nix
-  ];
+{ config, pkgs, inputs, ... }: {
+  imports = [ ./hardware-configuration.nix ];
 
   # enable flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  services.gvfs.enable = true;
+
+  boot.loader.efi.canTouchEfiVariables = true;
+  # GRUB stuff
   boot.loader.grub = {
     enable = true;
     devices = [ "nodev" ];
-    efiInstallAsRemovable = true;
     efiSupport = true;
     useOSProber = true;
   };
-  # services.xserver.windowManager.herbstluftwm.enable = true;
-  # services.xserver.displayManager.startx.enable = true;
-  # services.xserver.enable = true;
-  systemd.network.wait-online.enable = false;
-  boot.supportedFilesystems = [ "zfs" ];
-  networking.hostId = "b93f3baf";
-  services.zfs.autoScrub.enable = true;
-  boot.kernel.sysctl = {
-    "vm.max_map_count" = 16777216;
-    "fs.file-max" = 524288;
-  };
-  networking.extraHosts = "127.0.0.1 modules-cdn.eac-prod.on.epicgames.com";
-
-  # gayming
-  programs.steam.enable = true;
 
   networking.hostName = "nixpc"; # Define your hostname.
 
@@ -45,13 +26,16 @@
 
   # i am not a copyleft snob
   nixpkgs.config.allowUnfree = true;
+  services.locate.enable = true;
+
+  services.xserver.desktopManager.plasma6.enable = true;
+  services.xserver.enable = true;
+  #services.xserver.displayManager.sddm.enable = true;
+  #services.xserver.displayManager.sddm.wayland.enable = true;
 
   # nvidia
-  hardware.opengl = {
-    enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
-  };
+  #boot.kernelPackages = pkgs.linuxPackages_latest;
+  hardware.opengl = { enable = true; };
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.nvidia = {
     modesetting.enable = true;
@@ -60,6 +44,8 @@
     forceFullCompositionPipeline = true;
     package = config.boot.kernelPackages.nvidiaPackages.beta;
   };
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+  environment.variables.WLR_NO_HARDWARE_CURSORS = "1";
 
   programs.nix-ld.enable = true;
 
@@ -68,10 +54,7 @@
   # i still use windows(
   time.hardwareClockInLocalTime = true;
 
-  # no more x11
-  programs.hyprland.enable = true; # wait for may 15
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
-  environment.variables.WLR_NO_HARDWARE_CURSORS = "1";
+  programs.hyprland.enable = true;
 
   # Enable pipewire (pisswire)
   security.rtkit.enable = true;
@@ -86,14 +69,7 @@
   # i guess you've seen my username
   users.users.vavakado = {
     isNormalUser = true;
-    extraGroups = [
-      "wheel"
-      "docker"
-      "uinput"
-      "fuse"
-      "input"
-      "libvirtd"
-    ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "docker" "uinput" "fuse" "input" "libvirtd" ];
   };
 
   # dunno
@@ -115,12 +91,6 @@
     magicOrExtension = "\\x7fELF....AI\\x02";
   };
 
-  # real vpn, not your privacy bs
-  services.zerotierone = {
-    enable = true;
-    joinNetworks = [ "856127940c59da11" ];
-  };
-
   programs.nh = {
     enable = true;
     clean.enable = true;
@@ -130,102 +100,116 @@
 
   # PACKAGES
   environment.systemPackages = with pkgs; [
+    # # feh
+    # # flameshot
+    # # handbrake
+    # # inputs.nix-citizen.packages.${system}.lug-helper
+    # # inputs.nix-citizen.packages.${system}.star-citizen-helper
+    # # newsflash
+    # # picom
+    # # polybarFull
+    # # rofi
+    # # xclip
+    xwaylandvideobridge
+    # (sunshine.override { cudaSupport = true; })
+    blueberry
+    # btop # system monitor
+    # clang-tools
+    # dotnet
+    ffmpeg # av1 all the way
+    # filezilla
+    # gamemode
+    # gamescope
+    # gcc
+    # gnome.file-roller
+    # gnumake # bruh
+    lftp
+    # greetd.tuigreet
+    # grim
+    # gvfs # something
+    # gzip # zip
+    # imagemagick # webp is so small
+    # imv
+    # inputs.nix-alien.packages.${system}.nix-alien
+    libsForQt5.polonium # kde tiling
+    # jellyfin-media-player
+    # jellyfin-mpv-shim
+    # jftui
+    # kitty
+    # librewolf # the best browser
+    # lmms
+    # localsend # airdrop but free as in freedom
+    lutris
+    # mangohud
+    # mate.mate-polkit
+    mpv # best music player
+    distrobox
+    # nil # nix lsp
+    # niri
+    nix-index
+    # nixfmt # nix fmt
+    # nomacs
+    # ntfs3g # i still use windows(
+    # obs-studio
+    # p7zip # 7z
+    # pavucontrol # audio
+    # pkg-config
+    # polkit
     prismlauncher
-    # feh
-    # flameshot
-    # handbrake
-    # inputs.nix-citizen.packages.${system}.lug-helper
-    # inputs.nix-citizen.packages.${system}.star-citizen-helper
-    # newsflash
-    # picom
-    # polybarFull
-    # rofi
-    # xclip
-    # xdg-desktop-portal-wlr
-    # xorg.xhost
-    htop
+    protonup-qt
+    # python3 # hate it
+    # qbittorrent # best torrent client
+    # rclone # i still use drop box
+    # reaper
+    # ripgrep # zoomer grep
+    # rust-analyzer
+    # rustup # r**t (i am not trans i swear)
+    # soundconverter
+    # swww
+    # telegram-desktop
+    # unzip
+    # usbutils # lsusb
+    # vesktop # discord
+    discord
+    # vkd3d-proton
+    # waybar
+    # wine
+    # wine64
+    # winetricks
+    # xfce.thunar # gui
+    # zip # why
     (blender.override { cudaSupport = true; }) # for godot
-    (sunshine.override { cudaSupport = true; })
-    anki
-    blueman # bluepoop
-    btop # system monitor
+    alacritty
+    astyle
     cinnamon.nemo-fileroller
     cinnamon.nemo-with-extensions
     clang
     docker-compose
+    dotnet-runtime_8
+    dotnet-sdk_8
     dwarfs
-    eza # ls for zoomers
-    fd # find for zoomers
-    ffmpeg # av1 all the way
-    filezilla
-    gamemode
-    gamescope
-    gh # someday i will host my own gitlab instance
-    git # the best VCS
-    git-extras
-    gnome.file-roller
-    gnumake # bruh
+    firefox
+    gh
+    git
     godot_4 # better than unity
-    greetd.tuigreet
-    grim
-    gvfs # something
-    gzip # zip
-    imagemagick # webp is so small
-    imv
-    inputs.nix-alien.packages.${system}.nix-alien
-    kitty
-    librewolf # the best browser
-    localsend # airdrop but free as in freedom
-    lutris
-    mako
-    mangohud
-    mate.mate-polkit
-    mpv # best music player
-    nil # nix lsp
-    nix-index
-    nixfmt # nix fmt
-    nomacs
-    ntfs3g # i still use windows(
-    obs-studio
-    ollama
-    p7zip # 7z
-    pavucontrol # audio
-    pkg-config
-    polkit
-    protonup-qt
-    python3 # hate it
-    qbittorrent # best torrent client
-    rclone # i still use drop box
-    ripgrep # zoomer grep
-    rust-analyzer
-    rustup # r**t (i am not trans i swear)
-    slurp
-    soundconverter
-    spotify # premium((((
-    swww
-    tealdeer # no man, i use tldr
-    telegram-desktop
-    tmux # best terminal multiplexer
-    unzip
-    usbutils # lsusb
-    vesktop # discord
-    vkd3d-proton
     libnotify
-    niri
+    mako
+    mono
+    ollama
+    python3
+    swaybg
+    tmux # best terminal multiplexer
+    unityhub
+    vim
     waybar
     wget # curl is worse
-    wine
-    wine64
-    winetricks
-    wl-clipboard
-    wofi # wayland
-    xfce.thunar # gui
-    zip # why
-    reaper
-    lmms
-    jftui
-    jellyfin-media-player
+    wofi
+    xorg.xauth
+    xorg.xinit
   ];
+
+  programs.steam.enable = true;
+
   # disable dualshock touchpad
   services.udev.extraRules = ''
     # Disable DS4 touchpad acting as mouse
@@ -238,11 +222,13 @@
   #security oooow
   security.polkit.enable = true;
   programs.fuse.userAllowOther = true;
+
+  # I wont use a proper DE
   services.greetd.enable = true;
   services.greetd.settings = {
     default_session = {
-      command = ''
-        ${pkgs.greetd.tuigreet}/bin/tuigreet -g "Hello Vladimir" -r --remember-session'';
+      command =
+        "${pkgs.greetd.tuigreet}/bin/tuigreet -r --remember-session --cmd Hyprland";
       user = "vavakado";
     };
   };
@@ -259,22 +245,10 @@
   };
   hardware.uinput.enable = true;
 
-  #locate
-  services.locate.package = pkgs.plocate;
-  services.locate.enable = true;
-  services.locate.localuser = null;
-
-  system.autoUpgrade = {
-    enable = true;
-    flake = "/home/vavakado/flakey";
-    flags = [
-      "--update-input"
-      "nixpkgs"
-      "-L" # print build logs
-    ];
-    dates = "weekly";
-    randomizedDelaySec = "45min";
-  };
+  # #locate
+  # services.locate.package = pkgs.plocate;
+  # services.locate.enable = true;
+  # services.locate.localuser = null;
 
   # so calibre can see my book
   services.udisks2.enable = true;
@@ -289,10 +263,10 @@
   networking.firewall.allowedUDPPorts =
     [ 8080 4950 4955 8096 53317 47998 47999 47999 48000 ];
 
-  services.tailscale = {
-    enable = true;
-    openFirewall = true;
-  };
+  # services.tailscale = {
+  #   enable = true;
+  #   openFirewall = true;
+  # };
 
   # i still can't decide between these three
   fonts.packages = with pkgs; [
@@ -301,11 +275,12 @@
     noto-fonts-emoji
     emojione
     (nerdfonts.override {
-      fonts = [ "CascadiaCode" "VictorMono" "Iosevka" "JetBrainsMono" ];
+      fonts =
+        [ "CascadiaCode" "VictorMono" "Iosevka" "Hasklig" "JetBrainsMono" ];
     })
   ];
 
-  # docker
+  # Docker
   virtualisation.docker = {
     enableNvidia = true;
     enable = true;

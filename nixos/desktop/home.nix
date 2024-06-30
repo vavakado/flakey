@@ -1,13 +1,13 @@
-{ config, pkgs, lib, ... }: {
+{ pkgs, lib, inputs, ... }: {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "vavakado";
   home.homeDirectory = "/home/vavakado";
 
   qt.enable = true;
-  qt.style.name = "adwaita-dark";
-  qt.style.package = pkgs.adwaita-qt;
-  qt.platformTheme.name = "adwaita";
+  qt.style.name = "lightly-dark";
+  qt.style.package = pkgs.lightly-qt;
+  # qt.platformTheme.name = "adwaita";
 
   gtk.enable = true;
   gtk.cursorTheme.package = pkgs.bibata-cursors;
@@ -41,27 +41,22 @@
           pkgs.zlib
         ]}"
       ];
-      vimdiffAlias = true;
     };
 
     bash = {
       shellAliases = {
-        v = "nvim";
-        ls = "eza --icons=auto --color=auto";
-        ll = "eza --icons=auto --color=auto -l";
-        yeet = "~/rebuild";
-        yaat = "home-manager switch --flake /home/vavakado/flakey";
         ".." = "cd ..";
-        gs = "git status";
-        gc = "git commit -a";
-        g = "git";
+        v = "nvim";
       };
-      bashrcExtra = "stty stop ''; stty start '';";
       enable = true; # see note on other shells below
     };
     zoxide = {
       enable = true;
       enableBashIntegration = true;
+    };
+    eza = {
+      enable = true;
+      icons = true;
     };
     starship = {
       enable = true;
@@ -74,35 +69,58 @@
   nixpkgs.config.allowUnfree = true;
 
   home.sessionVariables = { EDITOR = "nvim"; };
-  home.sessionPath = [ "$HOME/.cargo/bin" ];
+  # home.sessionPath = [ "$HOME/.cargo/bin" ];
   home.packages = with pkgs; [
-    calibre
+    grim
+    imv
+    mpv
+    patchelf
+    slurp
+    stylua
+    udiskie
+    nomacs
+    lua51Packages.lua
+    lua51Packages.luarocks
+    unzip
+    # # mitschemeX11
+    # # qownnotes
+    # deadnix
+    # marksman
+    # nmap
+    # nodejs
+    # prettierd
+    # w3m-nox
+    #calibre
+    #gimp
+    #gocryptfs
+    alsa-utils
+    anki
+    bat
+    btop
+    dust
+    fd
     gdu
-    deadnix
+    glow
     go
-    gimp
-    gocryptfs
     gopls
     gotools
-    nb
-    qownnotes
-    icu
-    marksman
-    mitschemeX11
-    neovide
     keepassxc
-    nodejs
-    picard
-    prettierd
-    ranger
-    tig
+    nb
+    neovide
+    nixfmt
     pandoc
-    nmap
-    bat
-    w3m-nox
-    glow
-    dust
+    pavucontrol
+    ranger
+    ripgrep
+    gnumake
+    spotify # premium((((
     statix
+    tealdeer # no man, i use tldr
+    telegram-desktop
+    tig
+    vesktop
+    csharp-ls
     viu
+    wl-clipboard
   ];
 }
